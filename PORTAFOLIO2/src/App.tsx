@@ -62,8 +62,8 @@ function App() {
 
 
             </div>
-              <div className='papu justify-center m-auto mx-60 gap-6 items-center min-w-xl'>
-                <hr className='border-gray-700 ' />
+              <div className='papu flex justify-center m-auto mx-6 gap-6 items-center min-w-lg mb-3'>
+                <hr className='border-gray-700 w-auto ' />
                 <section>
                   <div>
                     <h2>Tecnologias</h2>
