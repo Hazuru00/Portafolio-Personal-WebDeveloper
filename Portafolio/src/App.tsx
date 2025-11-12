@@ -18,7 +18,7 @@ function App() {
                <div><MapPin /></div> <div><h3 className='text-xl'>Caracas, Venezuela</h3></div>
             </div>
             <div className='flex-row flex items-center gap-3 h-8'>
-              <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-white hover:outline-offset-[-2px] flex-row flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
+              <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-white hover:outline-offset-2 flex-row flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
             </div>
 
           </div>
