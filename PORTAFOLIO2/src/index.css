@@ -176,3 +176,14 @@ button:hover {
 
 
 }
+
+h2 {
+  font-size: var(--text-3xl) /* 1.875rem = 30px */;
+  line-height: var(--tw-leading, var(--text-3xl--line-height));
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+hr {
+  margin-bottom: 30px;
+}
