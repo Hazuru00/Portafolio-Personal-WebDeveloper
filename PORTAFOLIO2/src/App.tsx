@@ -52,7 +52,7 @@ function App() {
             <div className='gap-4 mx-60 mb-3'>
 
               <section className='section text-left'>
-                <div>
+                <div className='min-w-lg'>
                   <h2 className='text-3xl font-bold mb-3 '>Sobre mí</h2>
                   <p className=''>
                     Soy un desarrollador Full Stack con experiencia en la creación de aplicaciones web dinámicas y receptivas. Me especializo en tecnologías como React, Node.js y bases de datos SQL y NoSQL. Apasionado por aprender nuevas tecnologías y mejorar mis habilidades constantemente.
