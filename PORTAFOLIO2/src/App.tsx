@@ -10,43 +10,52 @@ function App() {
 
   return (
     <>
-       <div className='min-w-xl'>
-          <header className=''>
-            <NavBar_/>
-          </header>
-          <div id='Home' className='papu flex justify-center m-0 items-center min-w-lg mb-3'>
+       <header className=''>
+          <NavBar_/>
+       </header>
+       <div className='min-w-xl px-auto p-10 pt-0 pb-0'>
+
+          <div id='Home' className='papu flex justify-center m-0 items-center min-w-auto mb-3'>
             <span className='w-32 h-32 min-w-28 min-h-28 ml-2'>
               <img className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'/>
 
             </span>
-            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 '>
-              <h1 className=' font-stretch-normal text-4xl'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
+            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 w-auto '>
+              <h1 className=' font-stretch-normal text-4xl w-auto'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
+
               <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
-              <div className='flex-row w-1/2 flex gap-2 items-center'>
+              <div className='flex-row w-fit flex gap-2 items-center'>
                 <div><MapPin /></div> <div><h3 className='text-xl'>Caracas, Venezuela</h3></div>
               </div>
-              <div className='flex-row flex items-center gap-3 h-8'>
-                <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-row flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
+              <div className='flex flex-wrap w-fit mt-2 gap-2'>
 
-                <a target='_blank' href="">
-                  <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-row flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
-                    <FileText color={'oklch(62.7% 0.265 303.9)'}/>
-                  </button>
-                </a>
 
-                <a target='_blank' href="https://github.com/Hazuru00">
-                  <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-row flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
-                    <Github color={'oklch(62.7% 0.265 303.9)'}/>
-                  </button>
-                </a>
+                <div className='flex-wrap flex items-center gap-3 h-8'>
+                  <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-row flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
 
-                <a target='_blank' href="https://www.linkedin.com/in/moises-marcano-b85363389">
-                  <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-row flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
-                    <Linkedin color={'oklch(62.7% 0.265 303.9)'}/>
-                  </button>
-                </a>
+
+                </div>
+                <div className='h-8 flex flex-wrap gap-1 w-auto'>
+
+                  <a target='_blank' href="">
+                    <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
+                      <FileText color={'oklch(62.7% 0.265 303.9)'}/>
+                    </button>
+                  </a>
+
+                  <a target='_blank' href="https://github.com/Hazuru00">
+                    <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
+                      <Github color={'oklch(62.7% 0.265 303.9)'}/>
+                    </button>
+                  </a>
+
+                  <a target='_blank' href="https://www.linkedin.com/in/moises-marcano-b85363389">
+                    <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
+                      <Linkedin color={'oklch(62.7% 0.265 303.9)'}/>
+                    </button>
+                  </a>
+                </div>
               </div>
-
             </div>
 
           </div>
