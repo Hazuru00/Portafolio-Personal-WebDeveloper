@@ -74,7 +74,7 @@ function App() {
 
             </div>
               <div className='papu flex flex-col justify-center m-auto gap-6 items-center min-w-lg mb-3'>
-                <hr className='border-gray-700 w-auto px-80' />
+                <hr className='border-gray-700 w-3/6 min-w-lg' />
                 <section>
                   <div>
                     <h2>Tecnologias</h2>
