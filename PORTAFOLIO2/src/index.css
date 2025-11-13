@@ -193,3 +193,8 @@ h2 {
 hr {
   margin-bottom: 30px;
 }
+
+.dinamicflex {
+  display: flex;
+  flex-wrap: wrap;
+}

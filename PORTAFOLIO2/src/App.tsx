@@ -31,7 +31,7 @@ function App() {
 
 
                 <div className='flex-wrap flex items-center gap-3 h-8'>
-                  <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-row flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
+                  <a href="mailto:HazuruCh@proton.me"><button  className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-wrap flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail/> HazuruCh@proton.me</button></a>
 
 
                 </div>
@@ -66,7 +66,7 @@ function App() {
                 <div className='min-w-lg'>
                   <h2 className='text-3xl font-bold mb-3 '>Sobre mí</h2>
                   <p className=''>
-                    Soy un desarrollador Full Stack con experiencia en la creación de aplicaciones web dinámicas y receptivas. Me especializo en tecnologías como React, Node.js y bases de datos SQL y NoSQL. Apasionado por aprender nuevas tecnologías y mejorar mis habilidades constantemente.
+                    Soy un desarrollador Full Stack con experiencia en la creación de aplicaciones web dinámicas y receptivas. Me especializo en tecnologías como React, Node.js y motores de desarrollo de videojuegos como Godot. Apasionado por aprender nuevas tecnologías y mejorar mis habilidades constantemente.
                   </p>
                 </div>
               </section>
@@ -74,7 +74,7 @@ function App() {
 
             </div>
               <div className='papu flex flex-col justify-center m-auto gap-6 items-center min-w-lg mb-3'>
-                <hr className='border-gray-700 w-full max-w-xl ' />
+                <hr className='border-gray-700 w-auto px-80' />
                 <section>
                   <div>
                     <h2>Tecnologias</h2>
