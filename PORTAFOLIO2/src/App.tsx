@@ -11,13 +11,15 @@ function App() {
   return (
     <>
        <div className='min-w-xl'>
-          <NavBar_/>
-          <div id='Home' className='papu flex justify-center m-auto mx-6 gap-6 items-center min-w-lg mb-3'>
-            <span className='w-32 h-32 min-w-28 min-h-28'>
-              <img className='w-full rounded-full ' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'/>
+          <header className=''>
+            <NavBar_/>
+          </header>
+          <div id='Home' className='papu flex justify-center m-0 items-center min-w-lg mb-3'>
+            <span className='w-32 h-32 min-w-28 min-h-28 ml-2'>
+              <img className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'/>
 
             </span>
-            <div className='flex flex-col gap-2 m-7 mb-3'>
+            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 '>
               <h1 className=' font-stretch-normal text-4xl'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
               <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
               <div className='flex-row w-1/2 flex gap-2 items-center'>
@@ -62,8 +64,8 @@ function App() {
 
 
             </div>
-              <div className='papu flex justify-center m-auto mx-6 gap-6 items-center min-w-lg mb-3'>
-                <hr className='border-gray-700 w-auto ' />
+              <div className='papu flex flex-col justify-center m-auto gap-6 items-center min-w-lg mb-3'>
+                <hr className='border-gray-700 w-full max-w-xl ' />
                 <section>
                   <div>
                     <h2>Tecnologias</h2>
