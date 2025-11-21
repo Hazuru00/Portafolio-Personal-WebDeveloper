@@ -96,7 +96,7 @@ function App() {
                         </div>
 
                         <div className='text-sm font-bold'>
-                          <p>Typescript</p>
+                          <p>Tailwind CSS</p>
                         </div>
 
                       </span>
