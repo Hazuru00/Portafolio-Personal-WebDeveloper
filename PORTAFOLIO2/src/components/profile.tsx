@@ -6,8 +6,8 @@ import { Linkedin } from 'lucide-react';
 
 export default function Profile() {
     return (
-        <div id='Home' className='flex justify-center m-0 items-center min-w-auto mb-3'>
-            <span className='max-w-32  '>
+        <div id='Home' className='flex flex-wrap justify-center m-0 items-center min-w-auto mb-3'>
+            <span className='max-w-32  mt-6'>
                 <img className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG' />
 
             </span>
