@@ -11,7 +11,7 @@ export default function Profile() {
                 <img className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG' />
 
             </span>
-            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 p-4'>
+            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'>
                 <h1 className=' font-stretch-normal text-4xl w-fit'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
 
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
