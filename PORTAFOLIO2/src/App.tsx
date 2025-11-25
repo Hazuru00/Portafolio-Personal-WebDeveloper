@@ -1,5 +1,7 @@
 import NavBar_ from './components/NavBar.tsx';
 import Profile from './components/profile.tsx';
+import { motion } from "motion/react"
+
 //import { MapPin } from 'lucide-react';
 //import { Mail } from 'lucide-react';
 //import { FileText } from 'lucide-react';
@@ -11,14 +13,21 @@ function App() {
 
   return (
     <>
-      <header className=' w-full '>
+      <motion.header className=' w-full bg-gray-800 '
+      initial={{ y: -250, paddingTop: 'auto', height: 0 }}
+      animate={{ y: 0, height: 'auto', paddingTop: '0px' }}
+      transition={{ delay: 0.5, type: 'spring', stiffness: 40, width: { duration: 0.5 }, paddingTop: { duration: 2 } }}
+      >
         <NavBar_ />
-      </header>
-
+      </motion.header>
       <Profile />
 
 
-        <hr className='border-gray-700 max-w-3/6 w-auto min-w-3/5 justify-center m-auto' />
+        <motion.hr className='border-gray-700  justify-center m-auto'
+        initial={{ width: 0, maxWidth: 700 }}
+        animate={{ width: '100%', maxWidth: 500 }}
+        transition={{ duration: 1, delay: 1, type: 'spring', stiffness: 50 }}
+        />
 
       <div className='papu flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3'>
         <section>
