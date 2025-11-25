@@ -1,12 +1,9 @@
-import { boxShadow } from 'flowbite-react/plugin/tailwindcss/theme';
 import { MapPin } from 'lucide-react';
 import { Mail } from 'lucide-react';
 import { FileText } from 'lucide-react';
 import { Github } from 'lucide-react';
 import { Linkedin } from 'lucide-react';
-import { animate } from 'motion';
 import { motion } from "motion/react"
-import { tr } from 'motion/react-client';
 
 
 export default function Profile() {
@@ -28,7 +25,7 @@ export default function Profile() {
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
                 <div className='flex-row w-fit flex gap-2 items-center'>
                     <motion.div
-                    
+
                     initial={{ scale: 1 }}
                     animate={{ translateY: [0, -10, 0] }}
                     transition={{ duration:0.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.8 }}
