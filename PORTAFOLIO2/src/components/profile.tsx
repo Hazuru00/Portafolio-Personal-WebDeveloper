@@ -11,29 +11,29 @@ export default function Profile() {
         <div id='Home' className='flex flex-wrap justify-center m-0 items-center min-w-auto mb-3'>
             <span className='max-w-32  mt-6'>
                 <motion.img drag={true} className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'
-                initial={{ scale: 0, rotate: 50 }}
-                animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)', x: 0 , }}
-                transition={{ duration: 1, type: 'spring', stiffness: 100, x:{ ease: "easeInOut", delay: 0.5, duration: 0.2 } }}
-                whileHover={{ scale: 1.05, boxShadow: '0px 0px 15px 4px oklch(62.7% 0.265 303.9)' }}
-                whileDrag={{ boxShadow: '0px 0px 20px 4px oklch(62.7% 0.265 303.9)' }}
-                dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-                dragConstraints={{ top: -0, left: -0, right: -0, bottom: 0 }}
+                    initial={{ scale: 0, rotate: 50 }}
+                    animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)', x: 0, }}
+                    transition={{ duration: 1, type: 'spring', stiffness: 100, x: { ease: "easeInOut", delay: 0.5, duration: 0.2 } }}
+                    whileHover={{ scale: 1.05, boxShadow: '0px 0px 15px 4px oklch(62.7% 0.265 303.9)' }}
+                    whileDrag={{ boxShadow: '0px 0px 20px 4px oklch(62.7% 0.265 303.9)' }}
+                    dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+                    dragConstraints={{ top: -0, left: -0, right: -0, bottom: 0 }}
                 />
 
             </span>
             <motion.div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'
-            animate={{ opacity: 1, y: 0,  x: 0 }}
-            initial={{ opacity: 0, y: -50, x: 700 }}
-            transition={{ duration: 0.2, delay: 0.5, type: 'spring', stiffness: 50, x:{ ease: "easeOut", delay: 1, duration: 0.5 }, opacity: { delay: 0.8, duration: 1.5 } }}>
+                animate={{ opacity: 1, y: 0, x: 0 }}
+                initial={{ opacity: 0, y: -50, x: 700 }}
+                transition={{ duration: 0.2, delay: 0.5, type: 'spring', stiffness: 50, x: { ease: "easeOut", delay: 1, duration: 0.5 }, opacity: { delay: 1, duration: 1.5 } }}>
                 <h1 className=' font-stretch-normal text-4xl w-fit'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
 
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
                 <div className='flex-row w-fit flex gap-2 items-center'>
                     <motion.div
 
-                    initial={{ scale: 1 }}
-                    animate={{ translateY: [0, -10, 0] }}
-                    transition={{ duration:0.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.8 }}
+                        initial={{ scale: 1 }}
+                        animate={{ translateY: [0, -10, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.8 }}
 
                     ><MapPin /></motion.div> <div><h3 className='text-xl'>Caracas, Venezuela</h3></div>
                 </div>
@@ -42,8 +42,8 @@ export default function Profile() {
 
                     <div className='flex-wrap flex items-center gap-3 h-max-8'>
                         <motion.a href="mailto:HazuruCh@proton.me"
-                        whileHover={{ scale: 1.05, rotate: -1 }}
-                        whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.05, rotate: -1 }}
+                            whileTap={{ scale: 0.95 }}
                         ><button className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-wrap flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail /> HazuruCh@proton.me</button></motion.a>
 
 
@@ -51,8 +51,8 @@ export default function Profile() {
                     <div className='h-max-8 flex flex-wrap gap-1 w-max-auto'>
 
                         <motion.a target='_blank' href=""
-                         whileHover={{ scale: 1.1 }}
-                         whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
                                 <FileText color={'oklch(62.7% 0.265 303.9)'} />
@@ -60,8 +60,8 @@ export default function Profile() {
                         </motion.a>
 
                         <motion.a target='_blank' href="https://github.com/Hazuru00"
-                         whileHover={{ scale: 1.1 }}
-                         whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
                                 <Github color={'oklch(62.7% 0.265 303.9)'} />
@@ -69,8 +69,8 @@ export default function Profile() {
                         </motion.a>
 
                         <motion.a target='_blank' href="https://www.linkedin.com/in/moises-marcano-b85363389"
-                         whileHover={{ scale: 1.1 }}
-                         whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             <button className='hover:cursor-pointer hover:outline-2 hover:border-accent flex-wrap flex items-center gap-3 bg-violet-950 border-2 border-purple-700 rounded-4xl p-1 px-2 font-sans text-xl'>
                                 <Linkedin color={'oklch(62.7% 0.265 303.9)'} />
