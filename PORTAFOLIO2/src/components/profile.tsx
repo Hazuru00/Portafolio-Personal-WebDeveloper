@@ -10,16 +10,21 @@ export default function Profile() {
     return (
         <div id='Home' className='flex flex-wrap justify-center m-0 items-center min-w-auto mb-3'>
             <span className='max-w-32  mt-6'>
-                <motion.img drag className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG' 
-                initial={{ scale: 0, rotate: 50 }}
-                animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)' }}
-                transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
+                <motion.img drag={true} className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'
+                initial={{ scale: 0, rotate: 50, x: "40vh" }}
+                animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)', x: 0 , }}
+                transition={{ duration: 1, type: 'spring', stiffness: 100, x:{ ease: "easeInOut", delay: 0.5, duration: 0.2 } }}
+                whileHover={{ scale: 1.05, boxShadow: '0px 0px 15px 4px oklch(62.7% 0.265 303.9)' }}
                 whileDrag={{ boxShadow: '0px 0px 20px 4px oklch(62.7% 0.265 303.9)' }}
-                dragConstraints={{ top: -0, left: -0, right: 0, bottom: 0 }}
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+                dragConstraints={{ top: -0, left: -0, right: -0, bottom: 0 }}
                 />
 
             </span>
-            <div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'>
+            <motion.div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.8, delay: 0.5, type: 'spring', stiffness: 50 }}>
                 <h1 className=' font-stretch-normal text-4xl w-fit'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
 
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
@@ -73,7 +78,7 @@ export default function Profile() {
                         </motion.a>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
         </div>
     )
