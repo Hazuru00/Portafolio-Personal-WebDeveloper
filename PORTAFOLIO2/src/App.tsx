@@ -1,6 +1,7 @@
 import NavBar_ from './components/NavBar.tsx';
 import Profile from './components/profile.tsx';
 import { motion } from "motion/react"
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 //import { MapPin } from 'lucide-react';
 //import { Mail } from 'lucide-react';
@@ -70,7 +71,10 @@ function App() {
           </div>
         </section>
       </div>
+      <SpeedInsights />
+
     </>
+
   );
 };
 
