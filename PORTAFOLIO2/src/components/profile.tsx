@@ -1,3 +1,4 @@
+import { boxShadow } from 'flowbite-react/plugin/tailwindcss/theme';
 import { MapPin } from 'lucide-react';
 import { Mail } from 'lucide-react';
 import { FileText } from 'lucide-react';
@@ -14,8 +15,9 @@ export default function Profile() {
             <span className='max-w-32  mt-6'>
                 <motion.img drag className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG' 
                 initial={{ scale: 0, rotate: 50 }}
-                animate={{ scale: 1, rotate: 0}}
-                transition={{ duration: 0.5 }}
+                animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)' }}
+                transition={{ duration: 0.7, type: 'spring', stiffness: 100 }}
+                whileDrag={{ boxShadow: '0px 0px 20px 4px oklch(62.7% 0.265 303.9)' }}
                 dragConstraints={{ top: -0, left: -0, right: 0, bottom: 0 }}
                 />
 
