@@ -11,7 +11,7 @@ export default function Profile() {
         <div id='Home' className='flex flex-wrap justify-center m-0 items-center min-w-auto mb-3'>
             <span className='max-w-32  mt-6'>
                 <motion.img drag={true} className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'
-                initial={{ scale: 0, rotate: 50, x: "40vh" }}
+                initial={{ scale: 0, rotate: 50 }}
                 animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)', x: 0 , }}
                 transition={{ duration: 1, type: 'spring', stiffness: 100, x:{ ease: "easeInOut", delay: 0.5, duration: 0.2 } }}
                 whileHover={{ scale: 1.05, boxShadow: '0px 0px 15px 4px oklch(62.7% 0.265 303.9)' }}
@@ -22,9 +22,9 @@ export default function Profile() {
 
             </span>
             <motion.div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'
-            animate={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.8, delay: 0.5, type: 'spring', stiffness: 50 }}>
+            animate={{ opacity: 1, y: 0, width: 'auto', height: 'auto', x: 0 }}
+            initial={{ opacity: 0, y: -50, width: '0', height: '0', x: 700 }}
+            transition={{ duration: 0.2, delay: 0.5, type: 'spring', stiffness: 50, x:{ ease: "easeOut", delay: 1, duration: 0.5 }, height: { delay: 0.7, duration: 0.6 }, width: { delay: 0.8, duration: 0.5, type: "tween" }, opacity: { delay: 0.8, duration: 1.5 } }}>
                 <h1 className=' font-stretch-normal text-4xl w-fit'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
 
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>

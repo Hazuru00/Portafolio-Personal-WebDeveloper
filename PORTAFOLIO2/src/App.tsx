@@ -27,7 +27,7 @@ function App() {
         <motion.hr className='border-gray-700  justify-center m-auto'
         initial={{ width: 0, maxWidth: 700 }}
         animate={{ width: '100%', maxWidth: 500 }}
-        transition={{ duration: 1, delay: 1, type: 'spring', stiffness: 50 }}
+        transition={{ duration: 1, delay: 1.5, type: 'spring', stiffness: 50 }}
         />
 
       <div className='papu flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3'>
