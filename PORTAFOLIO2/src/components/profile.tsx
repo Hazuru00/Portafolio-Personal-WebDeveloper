@@ -22,9 +22,9 @@ export default function Profile() {
 
             </span>
             <motion.div className='flex flex-col gap-2 mt-7 mb-3 ml-7 mr-7'
-            animate={{ opacity: 1, y: 0, width: 'auto', height: 'auto', x: 0 }}
-            initial={{ opacity: 0, y: -50, width: '0', height: '0', x: 700 }}
-            transition={{ duration: 0.2, delay: 0.5, type: 'spring', stiffness: 50, x:{ ease: "easeOut", delay: 1, duration: 0.5 }, height: { delay: 0.7, duration: 0.6 }, width: { delay: 0.8, duration: 0.5, type: "tween" }, opacity: { delay: 0.8, duration: 1.5 } }}>
+            animate={{ opacity: 1, y: 0,  x: 0 }}
+            initial={{ opacity: 0, y: -50, x: 700 }}
+            transition={{ duration: 0.2, delay: 0.5, type: 'spring', stiffness: 50, x:{ ease: "easeOut", delay: 1, duration: 0.5 }, opacity: { delay: 0.8, duration: 1.5 } }}>
                 <h1 className=' font-stretch-normal text-4xl w-fit'><strong>Moises A. Marcano (Hazuru)</strong> </h1>
 
                 <h2 className=' text-3xl text-purple-500'>Full Stack Developer | Frontend Developer</h2>
