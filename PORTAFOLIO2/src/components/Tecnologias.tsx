@@ -14,7 +14,7 @@ export default function Tecnologias() {
 
             <div>
                 <h2>Tecnologias</h2>
-                <motion.div className='flex-wrap flex items-center gap-3 h-8 mt-4 mb-6 justify-center'
+                <motion.div className='flex-wrap flex items-center gap-3 h-auto mt-4 mb-6 justify-center'
                     initial={{ gap: 0 }}
                     animate={{ gap: "0.75rem" }}
                     transition={{ delay: 2, duration: 0.5, type: 'spring', stiffness: 50 }}
