@@ -53,7 +53,12 @@ function App() {
             <h2>Sobre mi</h2>
           </div>
         
-          <div>
+          <motion.div
+           initial={{ opacity: 0, y: 50 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 1, delay: 2, type: 'spring', stiffness: 50 }}
+          >
+            
             <p>
               Soy un desarrollador web apasionado me encanta crear experiencias atractivas y interactivas para los usuarios.
               Me especializo en el desarrollo frontend, utilizando tecnologías como React, TypeScript y CSS para construir interfaces de usuario modernas y receptivas.
@@ -64,7 +69,7 @@ function App() {
 
 
             </p>
-          </div>
+          </motion.div>
         </section>
       </div>
       <SpeedInsights />
