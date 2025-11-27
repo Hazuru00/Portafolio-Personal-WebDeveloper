@@ -47,17 +47,17 @@ function App() {
         animate={{ width: '100%', maxWidth: 450 }}
         transition={{ duration: 1, delay: 2.5, type: 'spring', stiffness: 50 }} 
       />
-      <div>
+      <motion.div className='flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3'
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2, type: 'spring', stiffness: 50 }}
+      >
         <section>
           <div>
             <h2>Sobre mi</h2>
           </div>
         
-          <motion.div
-           initial={{ opacity: 0, y: 50 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 1, delay: 2, type: 'spring', stiffness: 50 }}
-          >
+          <div>
             
             <p>
               Soy un desarrollador web apasionado me encanta crear experiencias atractivas y interactivas para los usuarios.
@@ -69,9 +69,9 @@ function App() {
 
 
             </p>
-          </motion.div>
+          </div>
         </section>
-      </div>
+      </motion.div>
       <SpeedInsights />
 
     </>
