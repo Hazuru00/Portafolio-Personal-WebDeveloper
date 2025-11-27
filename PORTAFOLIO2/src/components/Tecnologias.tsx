@@ -13,7 +13,7 @@ export default function Tecnologias() {
 
 
             <div>
-                <h2 className="justify-center items-center m-auto">Tecnologias</h2>
+                <h2 className="">Tecnologias</h2>
                 <motion.div className='flex-wrap flex items-center gap-3 h-auto mt-4 mb-6 justify-center'
                     initial={{ gap: 0 }}
                     animate={{ gap: "0.75rem" }}
