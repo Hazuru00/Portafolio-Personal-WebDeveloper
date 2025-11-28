@@ -54,7 +54,7 @@ function App() {
       >
         <section>
           <div>
-            <h2 className='justicenter items-center m-auto text-center'>Sobre mi</h2>
+            <h2 className='justify-center items-center m-auto text-center'>Sobre mi</h2>
           </div>
         
           <div>
