@@ -5,7 +5,7 @@
   "description": "Portafolio de Marcos Marcano - Desarrollador Full Stack",
   "version": "1.0.0",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#f0f0f0",
   "display": "standalone",
   "orientation": "portrait",
 
