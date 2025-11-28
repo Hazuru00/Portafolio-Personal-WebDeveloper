@@ -41,6 +41,37 @@ function App() {
       >
         <Tecnologias />
       </motion.div>
+      
+      <motion.hr className='border-gray-700  justify-center m-auto'
+        initial={{ width: 0, maxWidth: 700 }}
+        animate={{ width: '100%', maxWidth: 450 }}
+        transition={{ duration: 1, delay: 2.5, type: 'spring', stiffness: 50 }} 
+      />
+      <motion.div className='flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3'
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2, type: 'spring', stiffness: 50 }}
+      >
+        <section>
+          <div>
+            <h2 className='justicenter items-center m-auto text-center'>Sobre mi</h2>
+          </div>
+        
+          <div>
+            
+            <p>
+              Soy un desarrollador web apasionado me encanta crear experiencias atractivas y interactivas para los usuarios.
+              Me especializo en el desarrollo frontend, utilizando tecnologías como React, TypeScript y CSS para construir interfaces de usuario modernas y receptivas.
+              Tambien tengo conocimientos en backend con Node.js y bases de datos como MongoDB.
+              Disfruto trabajando en proyectos desafiantes que me permitan aprender y crecer como desarrollador.
+              Siempre estoy buscando nuevas oportunidades para colaborar y contribuir a proyectos emocionantes.
+
+
+
+            </p>
+          </div>
+        </section>
+      </motion.div>
       <SpeedInsights />
 
     </>
