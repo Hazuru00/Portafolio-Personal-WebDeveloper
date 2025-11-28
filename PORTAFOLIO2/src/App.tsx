@@ -59,16 +59,7 @@ function App() {
         
           <div>
             
-            <p>
-              Soy un desarrollador web apasionado me encanta crear experiencias atractivas y interactivas para los usuarios.
-              Me especializo en el desarrollo frontend, utilizando tecnologías como React, TypeScript y CSS para construir interfaces de usuario modernas y receptivas.
-              Tambien tengo conocimientos en backend con Node.js y bases de datos como MongoDB.
-              Disfruto trabajando en proyectos desafiantes que me permitan aprender y crecer como desarrollador.
-              Siempre estoy buscando nuevas oportunidades para colaborar y contribuir a proyectos emocionantes.
-
-
-
-            </p>
+            <p>Soy un desarrollador web apasionado me encanta crear experiencias atractivas y interactivas para los usuarios. Me especializo en el desarrollo frontend, utilizando tecnologías como React, TypeScript y CSS para construir interfaces de usuario modernas y receptivas. Tambien tengo conocimientos en backend con Node.js y bases de datos como MongoDB. Disfruto trabajando en proyectos desafiantes que me permitan aprender y crecer como desarrollador. Siempre estoy buscando nuevas oportunidades para colaborar y contribuir a proyectos emocionantes.</p>
           </div>
         </section>
       </motion.div>
