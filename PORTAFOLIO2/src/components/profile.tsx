@@ -41,10 +41,10 @@ export default function Profile() {
 
 
                     <div className='flex-wrap flex items-center gap-3 h-max-8'>
-                        <motion.a href="mailto:HazuruCh@proton.me"
+                        <motion.a href="mailto:dev.moisesmarcano@gmail.com"
                             whileHover={{ scale: 1.05, rotate: -1 }}
                             whileTap={{ scale: 0.95 }}
-                        ><button className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-wrap flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail /> HazuruCh@proton.me</button></motion.a>
+                        ><button className='hover:cursor-pointer hover:bg-purple-600   hover:outline-2 hover:outline-purple-500 hover:outline-offset-2px flex-wrap flex items-center gap-3 bg-accent rounded-4xl p-0.5 px-2 font-sans text-xl'><Mail />dev.moisesmarcano@gmail.com</button></motion.a>
 
 
                     </div>
