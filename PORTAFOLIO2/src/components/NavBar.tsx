@@ -18,7 +18,7 @@ export default function Navbar_() {
 
           <div className="mx-auto flex justify-center items-center w-full flex-wrap m-auto">
             <div className="flex-wrap flex justify-center">
-              <div className="">
+              <div className="px-3 w-auto">
                 <GooeyNav
                   items={items}
                   particleCount={15}
@@ -30,7 +30,7 @@ export default function Navbar_() {
                   colors={[1, 2, 3, 1, 2, 3, 1, 4]}
                 />
               </div>
-              <div>
+              <div className="px-3 w-auto">
                 <GooeyNav
                   items={items2}
                   particleCount={15}
