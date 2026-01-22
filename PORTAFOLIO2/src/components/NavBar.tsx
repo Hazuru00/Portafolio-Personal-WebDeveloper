@@ -2,6 +2,8 @@ import GooeyNav from "./GooeyNav";
 const items = [
   { label: "Home", href: "#home" },
   { label: "Sobre Mi", href: "#about" },
+];
+const items2 = [
   { label: "Contact", href: "#contact" },
   { label: "Proyectos", href: "#projects" },
 ];
@@ -19,6 +21,16 @@ export default function Navbar_() {
               <div className="">
                 <GooeyNav
                   items={items}
+                  particleCount={15}
+                  particleDistances={[90, 10]}
+                  particleR={100}
+                  initialActiveIndex={0}
+                  animationTime={600}
+                  timeVariance={300}
+                  colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+                />
+                <GooeyNav
+                  items={items2}
                   particleCount={15}
                   particleDistances={[90, 10]}
                   particleR={100}
