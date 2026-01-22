@@ -1,0 +1,18 @@
+{
+    "Proyectos": [
+        {
+            "id": 1,
+            "name": "Proyecto A",
+            "description": "Descripción del Proyecto A",
+            "technologies": ["React", "Tailwind CSS", "TypeScript"],
+            "link": "https://github.com/usuario/proyecto-a"
+        },
+        {
+            "id": 2,
+            "name": "Proyecto B",
+            "description": "Descripción del Proyecto B",
+            "technologies": ["Python", "Django"],
+            "link": "https://github.com/usuario/proyecto-b"
+        }
+    ]
+}

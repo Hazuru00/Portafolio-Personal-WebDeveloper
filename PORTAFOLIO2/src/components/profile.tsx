@@ -10,7 +10,7 @@ export default function Profile() {
     return (
         <div id='Home' className='flex flex-wrap justify-center m-0 items-center min-w-auto mb-3'>
             <span className='max-w-32  mt-6'>
-                <motion.img drag={true} className='w-full rounded-full' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'
+                <motion.img drag={true} className='w-full rounded-full z-20' src='https://avatars.githubusercontent.com/u/92418515?v=4' alt='GithubProfileIMG'
                     initial={{ scale: 0, rotate: 50 }}
                     animate={{ scale: 1, rotate: 0, boxShadow: '0px 0px 8px 2px oklch(62.7% 0.265 303.9)', x: 0, }}
                     transition={{ duration: 1, type: 'spring', stiffness: 100, x: { ease: "easeInOut", delay: 0.5, duration: 0.2 } }}
