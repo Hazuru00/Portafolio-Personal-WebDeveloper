@@ -57,31 +57,6 @@ function App() {
 
       <section className="">
         <motion.div
-          className="papu flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1,
-            delay: 2,
-            type: "spring",
-            stiffness: 50,
-          }}
-        >
-          <Tecnologias />
-        </motion.div>
-
-        <motion.hr
-          className="border-gray-700  justify-center m-auto"
-          initial={{ width: 0, maxWidth: 700 }}
-          animate={{ width: "100%", maxWidth: 450 }}
-          transition={{
-            duration: 1,
-            delay: 2.5,
-            type: "spring",
-            stiffness: 50,
-          }}
-        />
-        <motion.div
           className="flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3 p-8 pt-2"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,16 +67,12 @@ function App() {
             stiffness: 50,
           }}
         >
-          <div>
-            <h2
-              id="about"
-              className="justify-center items-center m-auto text-center"
-            >
+          <div id="about">
+            <h2 className="justify-center items-center m-auto text-center">
               Sobre mi
             </h2>
           </div>
-
-          <div id='about-Me'>
+          <div>
             <p className="text-justify">
               Soy un desarrollador web apasionado me encanta crear experiencias
               atractivas y interactivas para los usuarios. Me especializo en el
@@ -114,6 +85,30 @@ function App() {
               proyectos emocionantes.
             </p>
           </div>
+        </motion.div>
+        <motion.hr
+          className="border-gray-700  justify-center m-auto"
+          initial={{ width: 0, maxWidth: 700 }}
+          animate={{ width: "100%", maxWidth: 450 }}
+          transition={{
+            duration: 1,
+            delay: 2.5,
+            type: "spring",
+            stiffness: 50,
+          }}
+        />
+        <motion.div
+          className="papu flex flex-col justify-center m-auto gap-6 items-center max-w-lg mb-3"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1,
+            delay: 2,
+            type: "spring",
+            stiffness: 50,
+          }}
+        >
+          <Tecnologias />
         </motion.div>
       </section>
 
