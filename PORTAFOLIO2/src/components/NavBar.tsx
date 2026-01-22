@@ -29,6 +29,8 @@ export default function Navbar_() {
                   timeVariance={300}
                   colors={[1, 2, 3, 1, 2, 3, 1, 4]}
                 />
+              </div>
+              <div>
                 <GooeyNav
                   items={items2}
                   particleCount={15}
@@ -39,8 +41,9 @@ export default function Navbar_() {
                   timeVariance={300}
                   colors={[1, 2, 3, 1, 2, 3, 1, 4]}
                 />
+              </div>
 
-                {/* <a
+              {/* <a
                     href="#home"
                     className="text-purple-500 hover:text-white pr-3"
                   >
@@ -52,7 +55,7 @@ export default function Navbar_() {
                   >
                     Sobre mi
                   </a> */}
-              </div>
+
               {/* <div className="">
                 <a
                   href="#projects"
