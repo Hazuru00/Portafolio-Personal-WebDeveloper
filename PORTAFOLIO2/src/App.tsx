@@ -27,15 +27,16 @@ function App() {
     <div className="" id="home">
       <section>
         <motion.header
-          className=" w-full bg-gray-800 "
+          className=" w-full bg-gray-800"
           initial={{ y: -250, paddingTop: "auto", height: 0 }}
-          animate={{ y: 0, height: "auto", paddingTop: "0px" }}
+          animate={{ y: 0, height: "auto", paddingTop: "10px", marginBottom: "140px" }}
           transition={{
             delay: 0.5,
             type: "spring",
             stiffness: 40,
             width: { duration: 0.5 },
             paddingTop: { duration: 2 },
+            marginBottom: { duration: 2 },
           }}
         >
           <NavBar_ />

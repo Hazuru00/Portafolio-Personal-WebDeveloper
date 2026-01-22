@@ -9,7 +9,7 @@ const items2 = [
 ];
 export default function Navbar_() {
   return (
-    <nav className="bg-gray-800 p-3 pb-2 w-full h-auto">
+    <nav className="bg-gray-800 p-3 pb-2 w-full h-auto fixed top-0 z-50">
       <div className="justify-center m-auto">
         <div>
           <div className="text-purple-500 font-bold text-xl mb-2 flex justify-center ">
@@ -36,7 +36,7 @@ export default function Navbar_() {
                   particleCount={15}
                   particleDistances={[90, 10]}
                   particleR={100}
-                  initialActiveIndex={0}
+                  initialActiveIndex={1}
                   animationTime={600}
                   timeVariance={300}
                   colors={[1, 2, 3, 1, 2, 3, 1, 4]}
