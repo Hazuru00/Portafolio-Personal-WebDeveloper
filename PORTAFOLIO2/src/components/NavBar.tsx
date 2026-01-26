@@ -14,8 +14,8 @@ const items2 = [
 
 export default function Navbar_() {
   const [isOpen, setIsOpen] = useState(false);
-  function ToggleNavbar(initialState: boolean) {
-    return () => setIsOpen(!isOpen);
+  function ToggleNavbar() {
+    return setIsOpen(!isOpen);
   }
 
   return (
@@ -34,7 +34,7 @@ export default function Navbar_() {
           </div>
           <motion.span
             className="shadow-none cursor-pointer justify-center self-center m-auto flex justify-self-center"
-            onClick={ToggleNavbar(true)}
+            onClick={ToggleNavbar}
           >
             <AnimatePresence>
               {isOpen ? (
