@@ -89,10 +89,10 @@ export default function Navbar_() {
               {isOpen ? (
                 <motion.div
                   className="flex-wrap flex justify-center"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  exit={{ opacity: 0, height: 0 }}
+                  initial={{ opacity: 0, height: 0, translateY: -50 }}
+                  animate={{ opacity: 1, height: "auto", translateY: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut", }}
+                  exit={{ opacity: 0, height: 0, translateY: -50 }}
                 >
                   <div className="px-3 w-auto">
                     <GooeyNav
