@@ -2,7 +2,7 @@
 import NavBar_ from "./components/NavBar.tsx";
 import Profile from "./components/profile.tsx";
 import Tecnologias from "./components/Tecnologias.tsx";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from "@vercel/analytics/react";
 
 import "./App.css";
 
