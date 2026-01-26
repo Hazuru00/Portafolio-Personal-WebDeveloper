@@ -120,7 +120,7 @@ function App() {
       </section>
 
       <SpeedInsights />
-      <Analytics />
+      <Analytics mode="auto" debug endpoint="Analytics_" />
     </div>
   );
 }
