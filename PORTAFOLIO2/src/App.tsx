@@ -2,6 +2,7 @@
 import NavBar_ from "./components/NavBar.tsx";
 import Profile from "./components/profile.tsx";
 import Tecnologias from "./components/Tecnologias.tsx";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./App.css";
 
@@ -29,7 +30,12 @@ function App() {
         <motion.header
           className=" w-full bg-gray-800"
           initial={{ y: -250, paddingTop: "auto", height: 0 }}
-          animate={{ y: 0, height: "auto", paddingTop: "10px", marginBottom: "140px" }}
+          animate={{
+            y: 0,
+            height: "auto",
+            paddingTop: "10px",
+            marginBottom: "140px",
+          }}
           transition={{
             delay: 0.5,
             type: "spring",
@@ -114,6 +120,7 @@ function App() {
       </section>
 
       <SpeedInsights />
+      <Analytics />
     </div>
   );
 }
