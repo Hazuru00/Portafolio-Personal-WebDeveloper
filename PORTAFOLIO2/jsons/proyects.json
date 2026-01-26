@@ -5,6 +5,7 @@
             "name": "Proyecto A",
             "description": "Descripción del Proyecto A",
             "technologies": ["React", "Tailwind CSS", "TypeScript"],
+            "hero": "https://example.com/imagen-proyecto-a.jpg",
             "link": "https://github.com/usuario/proyecto-a"
         },
         {
@@ -12,6 +13,7 @@
             "name": "Proyecto B",
             "description": "Descripción del Proyecto B",
             "technologies": ["Python", "Django"],
+            "hero": "https://example.com/imagen-proyecto-b.jpg",
             "link": "https://github.com/usuario/proyecto-b"
         }
     ]

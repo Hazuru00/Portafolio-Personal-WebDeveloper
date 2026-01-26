@@ -177,7 +177,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             content: "";
             position: absolute;
             inset: -75px;
-            z-index: -2;
+            z-index: -222;
             background: black;
           }
           .effect.filter::after {
@@ -300,7 +300,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             {items.map((item, index) => (
               <li
                 key={index}
-                className={`rounded-full relative cursor-pointer transition-[background-color_color_box-shadow] duration-300 ease shadow-[0_0_0.5px_1.5px_transparent] text-white ${
+                className={`rounded-full relative cursor-pointer  text-white ${
                   activeIndex === index ? 'active' : ''
                 }`}
               >
