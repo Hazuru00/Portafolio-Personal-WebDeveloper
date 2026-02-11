@@ -60,16 +60,16 @@ export default function Navbar_() {
 
             <ol className="mob flex gap-5 font-medium text-lg ">
               <li>
-                <a href="home">Home</a>
+                <a href="#home">Home</a>
               </li>
               <li>
-                <a href="about">Sobre mi</a>{" "}
+                <a href="#about">Sobre mi</a>{" "}
               </li>
               <li>
                 <a href="">Proyectos</a>{" "}
               </li>
               <li>
-                <a href="home">Contacto</a>{" "}
+                <a href="#home">Contacto</a>{" "}
               
               </li>
             </ol>
