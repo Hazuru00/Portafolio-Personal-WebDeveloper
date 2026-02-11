@@ -42,7 +42,7 @@ export default function Navbar_() {
 
   return (
     <motion.nav
-      className="bg-gray-800 p-3 pb-2 w-full h-auto  top-0 z-50"
+      className="bg-gray-800 p-3 pb-2 w-full h-auto fixed top-0 z-50"
       transition={{
         duration: 0.5,
         ease: "easeInOut",
@@ -149,7 +149,7 @@ export default function Navbar_() {
                 <motion.div
                   className="flex-wrap flex justify-center"
                   initial={{ opacity: 0, height: 0, translateY: -50 }}
-                  animate={{ opacity: 1, height: "auto", translateY: 0 }}
+                  animate={{ opacity: 1, height: "100vh", translateY: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                   exit={{ opacity: 0, height: 0, translateY: -50 }}
                 >
