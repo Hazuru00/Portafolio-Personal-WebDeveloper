@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { name: "Contacto", href: "#contact" },
 ];
 
-// --- TUS VARIANTES MANTENIDAS Y OPTIMIZADAS ---
+// --- VARIANTES DE ANIMACIÓN ---
 const menuVars: Variants = {
   initial: { scaleY: 0 },
   animate: {
@@ -18,11 +18,7 @@ const menuVars: Variants = {
   },
   exit: {
     scaleY: 0,
-    transition: {
-      delay: 0.5,
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
-    },
+    transition: { delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -56,33 +52,84 @@ const mobileLinkVars: Variants = {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  // 1. Estética del Header al hacer scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 2. Lógica de Limpieza de URL y Estado
+  useEffect(() => {
+    if (activeSection) {
+      window.history.replaceState(null, "", `#${activeSection}`);
+    } else if (!isOpen) {
+      // Si no hay sección activa, limpiamos el hash de la URL
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, [activeSection, isOpen]);
+
+  // 3. Sensor Central con detección de "Vacío"
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-50% 0px -50% 0px", // Escanea solo la línea central
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Si entra una sección al centro, la activamos
+          setActiveSection(entry.target.id);
+        } else {
+          // Si una sección SALE del centro y es la que estaba activa, la limpiamos
+          setActiveSection((prev) => (prev === entry.target.id ? null : prev));
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
+    NAV_LINKS.forEach((link) => {
+      const sectionId = link.href.replace("#", "");
+      const element = document.getElementById(sectionId);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // --- LÓGICA DE NAVEGACIÓN CON DELAY ---
   const handleLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    e.preventDefault(); // Detiene el salto instantáneo
-    setIsOpen(false); // Dispara la animación de salida
+    e.preventDefault();
+    const targetId = href.replace("#", "");
+    const elem = document.getElementById(targetId);
 
-    // Esperamos 1000ms (0.5s links + 0.5s telón) antes de navegar
-    setTimeout(() => {
-      window.location.hash = href;
-    }, 1000);
+    if (isOpen) {
+      setIsOpen(false);
+      setTimeout(() => {
+        elem?.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }, 600);
+    } else {
+      elem?.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", href);
+    }
   };
 
   return (
     <>
-      {/* 1. HEADER ANIMADO (Eliminado el 'hidden' para permitir transición) */}
       <motion.header
         initial={{ y: -100 }}
         animate={scrolled || isOpen ? { y: 0 } : { y: -100 }}
@@ -100,101 +147,101 @@ export default function Navbar() {
 
           {/* DESKTOP MENU */}
           <nav className="hidden md:flex gap-8 items-center">
-            {NAV_LINKS.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className="relative text-gray-300 hover:text-white font-medium text-sm uppercase tracking-wider group"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-bold text-sm shadow-lg shadow-purple-500/20 transition-colors"
-            >
-              Hablemos
-            </motion.button>
+            {NAV_LINKS.map((link) => {
+              const sectionId = link.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className={`relative py-2 font-medium text-sm uppercase tracking-wider transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
-          {/* MOBILE HAMBURGER */}
-          <div className="md:hidden z-50 shadow-none">
+          {/* MOBILE BUTTON */}
+          <div className="md:hidden z-50">
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none flex flex-col justify-center items-center gap-1.5 w-10 h-10 bg-purple-800 rounded-xl"
+              className="text-white flex flex-col justify-center items-center gap-1.5 w-11 h-11 bg-purple-600/20 rounded-xl"
             >
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                className="block w-8 h-0.5 bg-white origin-center"
+                className="block w-6 h-0.5 bg-white origin-center"
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-8 h-0.5 bg-white"
+                className="block w-6 h-0.5 bg-purple-400"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                className="block w-8 h-0.5 bg-white origin-center"
+                className="block w-6 h-0.5 bg-white origin-center"
               />
             </button>
           </div>
         </div>
 
-        {/* 2. MOBILE MENU (Dentro del Header pero con AnimatePresence) */}
-        <AnimatePresence>
+        {/* MOBILE MENU */}
+        <AnimatePresence mode="wait">
           {isOpen && (
             <motion.div
               variants={menuVars}
               initial="initial"
               animate="animate"
               exit="exit"
-              className="fixed left-0 top-0 w-full h-screen bg-gray-900 origin-top flex flex-col justify-center items-center p-10 md:hidden z-40 overflow-hidden"
+              className="fixed inset-0 bg-gray-900 flex flex-col justify-center items-center p-10 md:hidden z-40 overflow-hidden"
             >
               <div className="flex flex-col h-full justify-between py-20 w-full">
                 <div className="text-center">
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-purple-500 font-bold tracking-widest text-sm mb-4 uppercase opacity-80"
-                  >
-                    Menu
+                  <motion.p className="text-purple-500 font-bold tracking-widest text-sm mb-8 uppercase opacity-60">
+                    Navegación
                   </motion.p>
-
                   <motion.div
                     variants={containerVars}
                     initial="initial"
                     animate="open"
                     exit="exit"
-                    className="flex flex-col gap-6"
+                    className="flex flex-col gap-8"
                   >
-                    {NAV_LINKS.map((link) => (
-                      <div key={link.name} className="overflow-hidden">
-                        <motion.div variants={mobileLinkVars}>
-                          <a
-                            href={link.href}
-                            onClick={(e) => handleLinkClick(e, link.href)}
-                            className="text-4xl font-bold text-white hover:text-purple-400 transition-colors block"
-                          >
-                            {link.name}
-                          </a>
-                        </motion.div>
-                      </div>
-                    ))}
+                    {NAV_LINKS.map((link) => {
+                      const isActive =
+                        activeSection === link.href.replace("#", "");
+                      return (
+                        <div key={link.name} className="overflow-hidden">
+                          <motion.div variants={mobileLinkVars}>
+                            <a
+                              href={link.href}
+                              onClick={(e) => handleLinkClick(e, link.href)}
+                              className={`text-5xl font-bold transition-colors block ${
+                                isActive ? "text-purple-500" : "text-white"
+                              }`}
+                            >
+                              {link.name}
+                            </a>
+                          </motion.div>
+                        </div>
+                      );
+                    })}
                   </motion.div>
                 </div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}
-                  exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
-                  className="text-center text-gray-500 text-sm"
-                >
-                  <p>© 2024 Mi Portafolio Hazuru</p>
-                </motion.div>
               </div>
             </motion.div>
           )}

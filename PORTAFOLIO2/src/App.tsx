@@ -23,6 +23,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollToPlugin);
 //import { Linkedin } from 'lucide-react';
 
 import "./App.css";
+
 function App() {
   return (
     <div className="" id="home">
