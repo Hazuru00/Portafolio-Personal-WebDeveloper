@@ -52,7 +52,7 @@ const mobileLinkVars: Variants = {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(true);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   // 1. Estética del Header al hacer scroll
