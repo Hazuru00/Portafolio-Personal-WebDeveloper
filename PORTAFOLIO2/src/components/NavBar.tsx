@@ -25,11 +25,7 @@ const menuVars: Variants = {
 const containerVars: Variants = {
   initial: { transition: { staggerChildren: 0.09, staggerDirection: -1 } },
   open: {
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.09,
-      staggerDirection: 1,
-    },
+    transition: { delayChildren: 0.3, staggerChildren: 0.09, staggerDirection: 1 },
   },
   exit: {
     transition: { staggerChildren: 0.05, staggerDirection: -1 },
@@ -92,10 +88,7 @@ export default function Navbar() {
       });
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions,
-    );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     NAV_LINKS.forEach((link) => {
       const sectionId = link.href.replace("#", "");
@@ -104,10 +97,21 @@ export default function Navbar() {
     });
 
     return () => observer.disconnect();
+    // // Resetear a "home" si el usuario sube manualmente al inicio
+    // const handleTopReset = () => {
+    //   if (window.scrollY < 100) setActiveSection("home");
+    // };
+    // window.addEventListener("scroll", handleTopReset);
+
+    // return () => {
+    //   observer.disconnect();
+    //   window.removeEventListener("scroll", handleTopReset);
+    // };
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // 4. Manejo de Clicks con Navegación Suave y Delay
   const handleLinkClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -118,6 +122,7 @@ export default function Navbar() {
 
     if (isOpen) {
       setIsOpen(false);
+      // Esperamos a que el menú móvil se retire antes de hacer scroll
       setTimeout(() => {
         elem?.scrollIntoView({ behavior: "smooth" });
         window.history.pushState(null, "", href);
@@ -161,10 +166,14 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
+
+                  {/* PROYECCIÓN DESLIZANTE */}
                   {isActive && (
                     <motion.span
                       layoutId="activeTab"
-                      className="absolute bottom-0 left-0 w-full h-[2px] bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       transition={{
                         type: "spring",
                         stiffness: 380,
@@ -177,11 +186,11 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE HAMBURGER */}
           <div className="md:hidden z-50">
             <button
               onClick={toggleMenu}
-              className="text-white flex flex-col justify-center items-center gap-1.5 w-11 h-11 bg-purple-600/20 rounded-xl"
+              className="text-white focus:outline-none flex flex-col justify-center items-center gap-1.5 w-11 h-11 bg-purple-600/20 hover:bg-purple-600/40 rounded-xl transition-colors"
             >
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -189,7 +198,7 @@ export default function Navbar() {
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-6 h-0.5 bg-purple-400"
+                className="block w-6 h-0.5 bg-white"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
@@ -207,13 +216,19 @@ export default function Navbar() {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="fixed inset-0 bg-gray-900 flex flex-col justify-center items-center p-10 md:hidden z-40 overflow-hidden"
+              className="fixed left-0 top-0 w-full h-screen bg-gray-900 origin-top flex flex-col justify-center items-center p-10 md:hidden z-40 overflow-hidden"
             >
               <div className="flex flex-col h-full justify-between py-20 w-full">
                 <div className="text-center">
-                  <motion.p className="text-purple-500 font-bold tracking-widest text-sm mb-8 uppercase opacity-60">
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="text-purple-500 font-bold tracking-widest text-sm mb-8 uppercase opacity-60"
+                  >
                     Navegación
                   </motion.p>
+
                   <motion.div
                     variants={containerVars}
                     initial="initial"
@@ -242,6 +257,15 @@ export default function Navbar() {
                     })}
                   </motion.div>
                 </div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0, transition: { delay: 0.7 } }}
+                  exit={{ opacity: 0, y: 20 }}
+                  className="text-center text-gray-500 text-sm"
+                >
+                  <p>© 2026 Hazuru Portafolio</p>
+                </motion.div>
               </div>
             </motion.div>
           )}
