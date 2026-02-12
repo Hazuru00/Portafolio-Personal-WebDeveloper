@@ -122,10 +122,10 @@ export default function Navbar() {
           </nav>
 
           {/* MOBILE HAMBURGER */}
-          <div className="md:hidden z-50">
+          <div className="md:hidden z-50 shadow-none">
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none flex flex-col justify-center items-center gap-1.5 w-10 h-10"
+              className="text-white focus:outline-none flex flex-col justify-center items-center gap-1.5 w-10 h-10 bg-purple-800 rounded-xl"
             >
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -133,7 +133,7 @@ export default function Navbar() {
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-8 h-0.5 bg-purple-500"
+                className="block w-8 h-0.5 bg-white"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
@@ -147,7 +147,7 @@ export default function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              variants={menuVars} 
+              variants={menuVars}
               initial="initial"
               animate="animate"
               exit="exit"
@@ -193,7 +193,7 @@ export default function Navbar() {
                   exit={{ opacity: 0, y: 20, transition: { duration: 0.3 } }}
                   className="text-center text-gray-500 text-sm"
                 >
-                  <p>© 2024 Tu Portafolio</p>
+                  <p>© 2024 Mi Portafolio Hazuru</p>
                 </motion.div>
               </div>
             </motion.div>
