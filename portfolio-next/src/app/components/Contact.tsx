@@ -1,8 +1,31 @@
 'use client'
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
+import { sendEmail } from '@/app/actions/sendEmail'; 
 
 const Contact = () => {
+  const [isPending, setIsPending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPending(true);
+
+    const formData = new FormData(e.currentTarget);
+    const result = await sendEmail(formData);
+
+    setIsPending(false);
+
+    if (result.success) {
+      setIsSent(true);
+      (e.target as HTMLFormElement).reset(); 
+      setTimeout(() => setIsSent(false), 5000); 
+    } else {
+      alert('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+    }
+  };
 
   const sectionVariants = {
     hidden: { opacity: 0 },
@@ -15,14 +38,6 @@ const Contact = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-  };
-
-  // NOTA: Este es un formulario de UI. Para hacerlo funcional, necesitarás conectarlo
-  // a un servicio de email (como EmailJS, Resend) o a un endpoint de tu backend.
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Aquí iría la lógica de envío
-    alert('Formulario enviado (simulación). ¡Necesitas conectar un servicio de backend!');
   };
 
   return (
@@ -52,8 +67,12 @@ const Contact = () => {
               ¿Tienes una pregunta o una propuesta? No dudes en escribirme. Estoy abierto a oportunidades de colaboración y nuevos desafíos.
             </p>
             <div className="flex justify-center md:justify-start gap-6 mt-4">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-500 transition-colors"><FaGithub size={32} /></a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-500 transition-colors"><FaLinkedin size={32} /></a>
+              <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-500 transition-colors">
+                <FaGithub size={32} />
+              </a>
+              <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-500 transition-colors">
+                <FaLinkedin size={32} />
+              </a>
             </div>
           </motion.div>
 
@@ -65,24 +84,61 @@ const Contact = () => {
           >
             <motion.div variants={itemVariants}>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
-              <input type="text" id="name" name="name" required className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"/>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all"
+              />
             </motion.div>
+
             <motion.div variants={itemVariants}>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
-              <input type="email" id="email" name="email" required className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"/>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all"
+              />
             </motion.div>
+
             <motion.div variants={itemVariants}>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Mensaje</label>
-              <textarea id="message" name="message" rows={5} required className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"></textarea>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows={5} 
+                required 
+                className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all"
+              ></textarea>
             </motion.div>
-            <motion.div variants={itemVariants} className="text-center md:text-right">
-              <button type="submit" className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300">
-                <span>Enviar Mensaje</span>
-                <FaPaperPlane />
+
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-end gap-4 text-right">
+              <AnimatePresence>
+                {isSent && (
+                  <motion.span 
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="text-green-400 flex items-center gap-2 font-medium"
+                  >
+                    <FaCheckCircle /> ¡Enviado con éxito!
+                  </motion.span>
+                )}
+              </AnimatePresence>
+
+              <button 
+                type="submit" 
+                disabled={isPending}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 active:scale-95 ${isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <span>{isPending ? 'Enviando...' : 'Enviar Mensaje'}</span>
+                {!isPending && <FaPaperPlane className="text-sm" />}
               </button>
             </motion.div>
           </motion.form>
-
         </motion.div>
       </div>
     </section>
