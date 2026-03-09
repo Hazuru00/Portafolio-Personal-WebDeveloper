@@ -1,5 +1,5 @@
 'use client';
-import { sendEmail } from '@src/actions/sendEmail';
+import { sendEmail } from '@/actions/sendEmail';
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
