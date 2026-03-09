@@ -1,0 +1,5 @@
+.hidden-item {
+  /* Oculta el elemento visualmente y no ocupa espacio */
+  display: none !important;
+  /* Opcionalmente, puedes usar visibility: hidden; si quieres que sigan ocupando espacio */
+}

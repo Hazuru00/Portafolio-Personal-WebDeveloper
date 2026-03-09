@@ -1,0 +1,19 @@
+[
+    {
+        "title": "Hazuru Portfolio v1",
+        "description": "La primera versión de mi portafolio, construida con React y Vite.",
+        "technicalDescription": "React, Vite, Tailwind CSS, Framer Motion",
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "tags": ["React", "Vite", "Tailwind CSS"],
+        "liveUrl": "https://hazuru.vercel.app/",
+        "repoUrl": "https://github.com/hazvru/portfolio"
+    },
+    {
+        "title": "Proyecto Clon de Discord",
+        "description": "Un clon de la interfaz de Discord, demostrando mis habilidades en la maquetación y el diseño de componentes.",
+        "technicalDescription": "React, Tailwind CSS, TypeScript",
+        "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "tags": ["React", "Tailwind CSS", "TypeScript"],
+        "repoUrl": "https://github.com/hazvru/discord-clone"
+    }
+]
