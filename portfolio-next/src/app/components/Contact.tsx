@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
-import { sendEmail } from '@/app/actions/sendEmail'; 
+import { sendEmail } from '../actions/sendEmail';
 
 const Contact = () => {
   const [isPending, setIsPending] = useState(false);
