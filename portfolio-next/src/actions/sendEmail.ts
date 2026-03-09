@@ -12,9 +12,9 @@ export async function sendEmail(formData: FormData) {
 
   try {
     await resend.emails.send({
-      from: 'Portfolio <onboarding@resend.dev>',
-      to: ['tu-correo@gmail.com'], // <-- CAMBIA ESTO POR TU CORREO REAL
-      subject: `Nuevo mensaje de ${name}`,
+      from: 'onboarding@resend.dev',
+      to: ['dev.moises.marcano@gmail.com'], // <-- CAMBIA ESTO POR TU CORREO REAL
+      subject: `Nuevo mensaje de ${name} Enviado desde HazuDev. Portfolio`,
       replyTo: email,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333;">
