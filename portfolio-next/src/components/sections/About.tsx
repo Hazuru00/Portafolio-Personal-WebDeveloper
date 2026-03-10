@@ -36,7 +36,7 @@ const Profile = () => {
         transition={{ type: "spring", stiffness: 300 }}
       >
         <Image
-          src="/PImage.jfif"
+          src="/PImage.jpeg"
           alt="Foto de perfil de Hazuru"
           layout="fill"
           objectFit="cover"
@@ -57,15 +57,15 @@ const GsapLogo = ({ className }: { className?: string }) => (
 
 const techData = {
   React: { Icon: FaReact, experience: 'Dominio avanzado de hooks, SSR, y patrones de componentes para arquitecturas escalables.', years: '3 años' },
-  'Next.js': { Icon: SiNextdotjs, experience: 'Expertise en App Router, Server Components, y optimización de rendimiento (ISR, SSG).', years: '1 año' },
+  'Next.js': { Icon: SiNextdotjs, experience: 'Expertise en App Router, Server Components, y optimización de rendimiento (ISR, SSG).', years: '2 años' },
   TypeScript: { Icon: SiTypescript, experience: 'Tipado estricto para construir aplicaciones robustas, mantenibles y con menos errores en tiempo de ejecución.', years: '3 años' },
-  'Node.js': { Icon: FaNodeJs, experience: 'Desarrollo de APIs RESTful, manejo de middlewares con Express y conexión a bases de datos.', years: '2 años' },
-  MongoDB: { Icon: SiMongodb, experience: 'Modelado de datos NoSQL con Mongoose, optimización de consultas y agregaciones complejas.', years: '2 años' },
+  'Node.js': { Icon: FaNodeJs, experience: 'Desarrollo de APIs RESTful, manejo de middlewares con Express y conexión a bases de datos.', years: '4 años' },
+  MongoDB: { Icon: SiMongodb, experience: 'Modelado de datos NoSQL con Mongoose, optimización de consultas y agregaciones complejas.', years: '3 años' },
   GSAP: { Icon: GsapLogo, experience: 'Creación de animaciones complejas, líneas de tiempo, y experiencias interactivas con ScrollTrigger y Draggable.', years: '1 año' },
-  'Tailwind CSS': { Icon: SiTailwindcss, experience: 'Diseño de interfaces modernas y responsivas con un enfoque utility-first y personalización de temas.', years: '3 años' },
+  'Tailwind CSS': { Icon: SiTailwindcss, experience: 'Diseño de interfaces modernas y responsivas con un enfoque utility-first y personalización de temas.', years: '4 años' },
   'Framer Motion': { Icon: SiFramer, experience: 'Animaciones declarativas, transiciones de página fluidas y gestos para una UX dinámica.', years: '2 años' },
   Git: { Icon: FaGitAlt, experience: 'Control de versiones profesional, flujos de trabajo (Git Flow) y colaboración efectiva en equipo.', years: '5 años' },
-  Figma: { Icon: FaFigma, experience: 'Diseño de prototipos interactivos, mockups de alta fidelidad y sistemas de diseño para una UX consistente.', years: '1 año' },
+  Figma: { Icon: FaFigma, experience: 'Diseño de prototipos interactivos, mockups de alta fidelidad y sistemas de diseño para una UX consistente.', years: '3 años' },
   Vercel: { Icon: SiVercel, experience: 'Despliegue contínuo, monitorización y gestión de variables de entorno para aplicaciones Next.js.', years: '2 años' },
   Firebase: { Icon: SiFirebase, experience: 'Autenticación, bases de datos en tiempo real (Firestore) y hosting para aplicaciones web full-stack.', years: '2 años' },
   Vuejs: { Icon: FaVuejs, experience: 'Desarrollo de aplicaciones reactivas con el ecosistema de Vue, incluyendo Vuex y Vue Router.', years: '1 año' },
