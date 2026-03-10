@@ -75,7 +75,7 @@ const Contact = () => {
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">Email</label>
-                            <input type="email" id="email" name="senderEmail" required className="form-input" placeholder="tu@email.com"/>
+                            <input type="email" id="email" name="email" required className="form-input" placeholder="tu@email.com"/>
                         </div>
                     </div>
                     <div>
