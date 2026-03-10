@@ -22,7 +22,15 @@ export function Contact() {
         >
           <input
             className="h-14 w-full rounded-lg border border-gray-400/20 bg-gray-800/10 p-4"
-            name="senderEmail"
+            name="name"
+            type="text"
+            required
+            maxLength={500}
+            placeholder="Your name"
+          />
+          <input
+            className="h-14 w-full rounded-lg border border-gray-400/20 bg-gray-800/10 p-4"
+            name="email"
             type="email"
             required
             maxLength={500}
