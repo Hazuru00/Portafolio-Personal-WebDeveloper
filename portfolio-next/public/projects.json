@@ -4,7 +4,7 @@
         "description": "Una aplicación para la gestión de información estudiantil, pasantías y horas de labor social.",
         "technicalDescription": "React, Tailwind CSS, TypeScript",
         "image": "/pasant-log-desing.PNG",
-        "tags": ["React", "Tailwind CSS", "TypeScript", "nextJS", "FireBase", "Motion"],
+        "tags": ["React", "Tailwind CSS", "TypeScript", "Next.JS", "FireBase", "Framer Motion", "Vercel"],
         "liveUrl": "https://pasant-log.vercel.app",
         "repoUrl": "https://github.com/Hazuru00"
     },
@@ -13,7 +13,7 @@
         "description": "La primera versión de mi portafolio, construida con React y Vite.",
         "technicalDescription": "React, Vite, Tailwind CSS, Framer Motion",
         "image": "/portfolio-1-desing.PNG",
-        "tags": ["React", "Vite", "Tailwind CSS", "Motion"],
+        "tags": ["React", "Vite", "Tailwind CSS", "Motion", "TypeScript", "Vercel"],
         "liveUrl": "https://hazuru.vercel.app/",
         "repoUrl": "https://github.com/Hazuru00/Portafolio-Personal-WebDeveloper"
     }
