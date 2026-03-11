@@ -23,6 +23,7 @@ const Profile = () => {
         type: 'x,y',
         bounds: containerRef.current,
         inertia: true,
+        zIndexBoost: false, // Evita que GSAP cambie el z-index
       });
     }
   }, { scope: containerRef });

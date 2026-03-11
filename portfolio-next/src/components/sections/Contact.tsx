@@ -55,7 +55,7 @@ const Contact = () => {
                         </p>
                     </div>
                     <div className="flex items-center gap-5 mt-8 md:mt-0">
-                        <a href="https://github.com/hazvru" target="_blank" rel="noopener noreferrer" className="text-zinc-400 transition-colors duration-300 hover:text-violet-400" aria-label="GitHub de Hazuru">
+                        <a href="https://github.com/hazuru00" target="_blank" rel="noopener noreferrer" className="text-zinc-400 transition-colors duration-300 hover:text-violet-400" aria-label="GitHub de Hazuru">
                             <FaGithub size={28} />
                         </a>
                         <a href="https://www.linkedin.com/in/miguel-angel-vallejo-604928225/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 transition-colors duration-300 hover:text-violet-400" aria-label="LinkedIn de Hazuru">
