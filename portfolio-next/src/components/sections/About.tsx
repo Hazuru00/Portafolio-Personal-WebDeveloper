@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
-import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaJest } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaVest } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
@@ -88,7 +88,7 @@ const techData = {
   OpenCode: { Icon: OpenCodeLogo, experience: 'Asistente de desarrollo con IA para código, debugging y arquitectura de software.', years: '1 año' },
   'Docker Compose': { Icon: FaDocker, experience: 'Orquestación de múltiples contenedores para entornos de desarrollo y producción reproducibles.', years: '1 año' },
   'CI/CD': { Icon: FaGithub, experience: 'Pipelines automatizados con GitHub Actions para testing, build y deploy continuo.', years: '1 año' },
-  Testing: { Icon: FaJest, experience: 'Escritura de tests unitarios y de integración para garantizar calidad y confiabilidad del código.', years: '1 año' },
+  Testing: { Icon: FaVest, experience: 'Escritura de tests unitarios y de integración para garantizar calidad y confiabilidad del código.', years: '1 año' },
 };
 
 interface Project { title: string; tags: string[]; }

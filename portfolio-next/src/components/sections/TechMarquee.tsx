@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaJest } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaVest } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiFirebase, SiVercel, SiPostman, SiFigma, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 
 // GSAP Logo SVG Component
@@ -45,7 +45,7 @@ const technologies = [
   { Icon: OpenCodeLogo, name: 'OpenCode' },
   { Icon: FaDocker, name: 'Docker Compose' },
   { Icon: FaGithub, name: 'GitHub Actions' },
-  { Icon: FaJest, name: 'Testing' },
+  { Icon: FaVest, name: 'Testing' },
 ];
 
 const TechMarquee = () => {
