@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
-import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaJest } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
@@ -56,6 +56,15 @@ const GsapLogo = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// OpenCode Logo SVG Component
+const OpenCodeLogo = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6"></polyline>
+    <polyline points="8 6 2 12 8 18"></polyline>
+    <line x1="14" y1="4" x2="10" y2="20"></line>
+  </svg>
+);
+
 const techData = {
   React: { Icon: FaReact, experience: 'Dominio avanzado de hooks, SSR, y patrones de componentes para arquitecturas escalables.', years: '4 años' },
   'Next.js': { Icon: SiNextdotjs, experience: 'Expertise en App Router, Server Components, y optimización de rendimiento (ISR, SSG).', years: '2 años' },
@@ -76,6 +85,10 @@ const techData = {
   pnpm: { Icon: SiPnpm, experience: 'Gestor de paquetes eficiente con espacio en disco y estricto para proyectos Node.js.', years: '1 año' },
   FastAPI: { Icon: SiFastapi, experience: 'Construcción de APIs de alto rendimiento con Python, documentación automática y validación de datos.', years: '1 año' },
   Bash: { Icon: SiGnubash, experience: 'Automatización de tareas, scripting de sistema y administración de servidores Linux.', years: '2 años' },
+  OpenCode: { Icon: OpenCodeLogo, experience: 'Asistente de desarrollo con IA para código, debugging y arquitectura de software.', years: '1 año' },
+  'Docker Compose': { Icon: FaDocker, experience: 'Orquestación de múltiples contenedores para entornos de desarrollo y producción reproducibles.', years: '1 año' },
+  'CI/CD': { Icon: FaGithub, experience: 'Pipelines automatizados con GitHub Actions para testing, build y deploy continuo.', years: '1 año' },
+  Testing: { Icon: FaJest, experience: 'Escritura de tests unitarios y de integración para garantizar calidad y confiabilidad del código.', years: '1 año' },
 };
 
 interface Project { title: string; tags: string[]; }

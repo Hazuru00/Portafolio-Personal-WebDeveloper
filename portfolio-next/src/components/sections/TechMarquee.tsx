@@ -3,13 +3,22 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaJest } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiFirebase, SiVercel, SiPostman, SiFigma, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 
 // GSAP Logo SVG Component
 const GsapLogo = ({ className }: { className?: string }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
     <path fill="currentColor" d="M448 96v320h-64V234.4L224 429.6 64 234.4V416H0V96h64v123.6l160 197.2 160-197.2V96h64z"/>
+  </svg>
+);
+
+// OpenCode Logo SVG Component
+const OpenCodeLogo = ({ className }: { className?: string }) => (
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6"></polyline>
+    <polyline points="8 6 2 12 8 18"></polyline>
+    <line x1="14" y1="4" x2="10" y2="20"></line>
   </svg>
 );
 
@@ -33,6 +42,10 @@ const technologies = [
   { Icon: SiPnpm, name: 'pnpm' },
   { Icon: SiFastapi, name: 'FastAPI' },
   { Icon: SiGnubash, name: 'Bash' },
+  { Icon: OpenCodeLogo, name: 'OpenCode' },
+  { Icon: FaDocker, name: 'Docker Compose' },
+  { Icon: FaGithub, name: 'GitHub Actions' },
+  { Icon: FaJest, name: 'Testing' },
 ];
 
 const TechMarquee = () => {

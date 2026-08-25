@@ -27,27 +27,11 @@
     },
     {
         "title": "Pentest Lab",
-        "description": "Laboratorio de prácticas de ciberseguridad con herramientas de penetration testing y automatización de scripts de seguridad.",
-        "technicalDescription": "Python, Bash, Security",
+        "description": "Laboratorio de prácticas de ciberseguridad con agentes de IA, sandboxing con Docker y orquestación con FastAPI.",
+        "technicalDescription": "Python, FastAPI, Docker, CrewAI",
         "image": "/portfolio-1-desing.PNG",
-        "tags": ["Python", "Bash", "Ciberseguridad", "Automatización"],
+        "tags": ["Python", "FastAPI", "Docker", "Ciberseguridad", "IA"],
         "repoUrl": "https://github.com/Hazuru00/pentest_lab"
-    },
-    {
-        "title": "Cyber Monitor",
-        "description": "Herramienta de monitoreo de seguridad con dashboard en tiempo real para métricas de red y alertas de intrusiones.",
-        "technicalDescription": "TypeScript, Node.js",
-        "image": "/portfolio-1-desing.PNG",
-        "tags": ["TypeScript", "Node.js", "Seguridad", "Dashboard"],
-        "repoUrl": "https://github.com/Hazuru00/cyber-monitor"
-    },
-    {
-        "title": "AACL - Component Library",
-        "description": "Mi librería de componentes personal para uso libre, con componentes reutilizables y documentación.",
-        "technicalDescription": "TypeScript, React",
-        "image": "/portfolio-1-desing.PNG",
-        "tags": ["TypeScript", "React", "Componentes", "Librería"],
-        "repoUrl": "https://github.com/Hazuru00/AACL--An-Another-Component-Library-"
     },
     {
         "title": "Hazuru's Assistant - Discord Bot",
@@ -55,5 +39,14 @@
         "technicalDescription": "Node.js, Discord.js, Express, Socket.io",
         "image": "/dashboard.PNG",
         "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"]
+    },
+    {
+        "title": "Spotify Readme Widget",
+        "description": "Widget personalizado de Spotify now-playing desplegado en Vercel, con integración a la API de Spotify y diseño custom.",
+        "technicalDescription": "Next.js, TypeScript, Spotify API",
+        "image": "/portfolio-1-desing.PNG",
+        "tags": ["Next.js", "TypeScript", "Spotify API", "Vercel"],
+        "liveUrl": "https://spotify-readme-five-lovat.vercel.app",
+        "repoUrl": "https://github.com/Hazuru00/spotify-readme-vercel"
     }
 ]
