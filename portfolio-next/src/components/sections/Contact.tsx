@@ -1,6 +1,6 @@
 'use client';
 import { sendEmail } from '@/actions/sendEmail';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | 'rateLimit'; message: string } | null>(null);
+  const [pending, setPending] = useState(false);
 
   useGSAP(() => {
     const el = sectionRef.current;
@@ -66,7 +68,17 @@ const Contact = () => {
 
                 {/* Formulario de Contacto */}
                 <form action={async (formData) => {
-                  await sendEmail(formData);
+                  setPending(true);
+                  setStatus(null);
+                  const result = await sendEmail(formData);
+                  setPending(false);
+                  if (result.success) {
+                    setStatus({ type: 'success', message: '¡Mensaje enviado correctamente!' });
+                  } else if (result.error) {
+                    setStatus({ type: 'rateLimit', message: result.error });
+                  } else {
+                    setStatus({ type: 'error', message: 'Error al enviar. Intenta de nuevo.' });
+                  }
                 }} className="md:col-span-2 space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
@@ -82,9 +94,18 @@ const Contact = () => {
                         <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">Mensaje</label>
                         <textarea id="message" name="message" rows={5} required className="form-input" placeholder="¿En qué puedo ayudarte?"></textarea>
                     </div>
+                    {status && (
+                      <div className={`text-sm font-medium px-4 py-2 rounded-lg ${
+                        status.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/30' :
+                        status.type === 'rateLimit' ? 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/30' :
+                        'bg-red-500/10 text-red-400 border border-red-500/30'
+                      }`}>
+                        {status.message}
+                      </div>
+                    )}
                     <div className="text-right pt-2">
-                        <button type="submit" className="inline-flex items-center gap-3 bg-violet-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-violet-500 shadow-lg shadow-violet-800/20 hover:shadow-violet-700/40 focus:outline-none focus:ring-4 focus:ring-violet-500/50">
-                            <span>Enviar Mensaje</span>
+                        <button type="submit" disabled={pending} className="inline-flex items-center gap-3 bg-violet-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-violet-500 shadow-lg shadow-violet-800/20 hover:shadow-violet-700/40 focus:outline-none focus:ring-4 focus:ring-violet-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                            <span>{pending ? 'Enviando...' : 'Enviar Mensaje'}</span>
                             <FaPaperPlane />
                         </button>
                     </div>

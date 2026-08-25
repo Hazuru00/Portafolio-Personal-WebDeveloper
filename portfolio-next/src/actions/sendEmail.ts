@@ -1,6 +1,7 @@
 'use server';
 
 import { Resend } from 'resend';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 // Aquí usamos la variable de entorno, nunca el texto plano
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -9,6 +10,13 @@ export async function sendEmail(formData: FormData) {
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   const message = formData.get('message') as string;
+
+  // Rate limit: máximo 5 emails por minuto por IP
+  const ip = 'global'; // En server actions no hay acceso directo a IP, usar key global
+  const { allowed, retryAfter } = checkRateLimit(ip);
+  if (!allowed) {
+    return { success: false, error: `Demasiadas solicitudes. Intenta de nuevo en ${retryAfter}s` };
+  }
 
   try {
     await resend.emails.send({

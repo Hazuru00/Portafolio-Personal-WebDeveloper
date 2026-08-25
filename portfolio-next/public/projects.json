@@ -16,5 +16,44 @@
         "tags": ["React", "Vite", "Tailwind CSS", "Framer Motion", "TypeScript", "Vercel"],
         "liveUrl": "https://hazuru.vercel.app/",
         "repoUrl": "https://github.com/Hazuru00/Portafolio-Personal-WebDeveloper"
+    },
+    {
+        "title": "Hyperlink HUD",
+        "description": "Una experiencia de enlaces interactiva y cyberpunk inspirada en interfaces HUD de alta tecnología. Control total de identidad desde un único archivo de configuración.",
+        "technicalDescription": "Next.js 14, Framer Motion, GSAP",
+        "image": "/portfolio-1-desing.PNG",
+        "tags": ["Next.js", "TypeScript", "Framer Motion", "GSAP", "Tailwind CSS"],
+        "repoUrl": "https://github.com/Hazuru00/hyperlink-hud"
+    },
+    {
+        "title": "Pentest Lab",
+        "description": "Laboratorio de prácticas de ciberseguridad con herramientas de penetration testing y automatización de scripts de seguridad.",
+        "technicalDescription": "Python, Bash, Security",
+        "image": "/portfolio-1-desing.PNG",
+        "tags": ["Python", "Bash", "Ciberseguridad", "Automatización"],
+        "repoUrl": "https://github.com/Hazuru00/pentest_lab"
+    },
+    {
+        "title": "Cyber Monitor",
+        "description": "Herramienta de monitoreo de seguridad con dashboard en tiempo real para métricas de red y alertas de intrusiones.",
+        "technicalDescription": "TypeScript, Node.js",
+        "image": "/portfolio-1-desing.PNG",
+        "tags": ["TypeScript", "Node.js", "Seguridad", "Dashboard"],
+        "repoUrl": "https://github.com/Hazuru00/cyber-monitor"
+    },
+    {
+        "title": "AACL - Component Library",
+        "description": "Mi librería de componentes personal para uso libre, con componentes reutilizables y documentación.",
+        "technicalDescription": "TypeScript, React",
+        "image": "/portfolio-1-desing.PNG",
+        "tags": ["TypeScript", "React", "Componentes", "Librería"],
+        "repoUrl": "https://github.com/Hazuru00/AACL--An-Another-Component-Library-"
+    },
+    {
+        "title": "Hazuru's Assistant - Discord Bot",
+        "description": "Bot de Discord con funcionalidades personalizadas para gestión de servidores, automatización de tareas y dashboard en tiempo real.",
+        "technicalDescription": "Node.js, Discord.js, Express, Socket.io",
+        "image": "/dashboard.PNG",
+        "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"]
     }
 ]

@@ -77,6 +77,9 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto">
             Creando experiencias digitales memorables con un enfoque en el rendimiento y la estética.
           </p>
+          <p className="text-sm md:text-base text-violet-300 mt-3 font-medium">
+            Técnico en Telemática
+          </p>
         </motion.div>
 
         {/* Scroll Down Indicator */}

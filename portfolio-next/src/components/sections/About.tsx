@@ -6,8 +6,8 @@ import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
-import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython } from 'react-icons/fa';
+import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 gsap.registerPlugin(Draggable);
@@ -57,20 +57,25 @@ const GsapLogo = ({ className }: { className?: string }) => (
 );
 
 const techData = {
-  React: { Icon: FaReact, experience: 'Dominio avanzado de hooks, SSR, y patrones de componentes para arquitecturas escalables.', years: '3 años' },
-  'Next.js': { Icon: SiNextdotjs, experience: 'Expertise en App Router, Server Components, y optimización de rendimiento (ISR, SSG).', years: '1 años' },
-  TypeScript: { Icon: SiTypescript, experience: 'Tipado estricto para construir aplicaciones robustas, mantenibles y con menos errores en tiempo de ejecución.', years: '3 años' },
-  'Node.js': { Icon: FaNodeJs, experience: 'Desarrollo de APIs RESTful, manejo de middlewares con Express y conexión a bases de datos.', years: '2 años' },
-  MongoDB: { Icon: SiMongodb, experience: 'Modelado de datos NoSQL con Mongoose, optimización de consultas y agregaciones complejas.', years: '2 años' },
-  GSAP: { Icon: GsapLogo, experience: 'Creación de animaciones complejas, líneas de tiempo, y experiencias interactivas con ScrollTrigger y Draggable.', years: '1 año' },
-  'Tailwind CSS': { Icon: SiTailwindcss, experience: 'Diseño de interfaces modernas y responsivas con un enfoque utility-first y personalización de temas.', years: '3 años' },
-  'Framer Motion': { Icon: SiFramer, experience: 'Animaciones declarativas, transiciones de página fluidas y gestos para una UX dinámica.', years: '2 años' },
-  Git: { Icon: FaGitAlt, experience: 'Control de versiones profesional, flujos de trabajo (Git Flow) y colaboración efectiva en equipo.', years: '4 años' },
-  Figma: { Icon: FaFigma, experience: 'Diseño de prototipos interactivos, mockups de alta fidelidad y sistemas de diseño para una UX consistente.', years: '1 años' },
-  Vercel: { Icon: SiVercel, experience: 'Despliegue contínuo, monitorización y gestión de variables de entorno para aplicaciones Next.js.', years: '2 años' },
-  Firebase: { Icon: SiFirebase, experience: 'Autenticación, bases de datos en tiempo real (Firestore) y hosting para aplicaciones web full-stack.', years: '2 años' },
-  Vuejs: { Icon: FaVuejs, experience: 'Desarrollo de aplicaciones reactivas con el ecosistema de Vue, incluyendo Vuex y Vue Router.', years: '1 año' },
-  Postman: { Icon: SiPostman, experience: 'Pruebas y depuración de APIs RESTful, creación de colecciones y automatización de tests.', years: '3 años' },
+  React: { Icon: FaReact, experience: 'Dominio avanzado de hooks, SSR, y patrones de componentes para arquitecturas escalables.', years: '4 años' },
+  'Next.js': { Icon: SiNextdotjs, experience: 'Expertise en App Router, Server Components, y optimización de rendimiento (ISR, SSG).', years: '2 años' },
+  TypeScript: { Icon: SiTypescript, experience: 'Tipado estricto para construir aplicaciones robustas, mantenibles y con menos errores en tiempo de ejecución.', years: '4 años' },
+  'Node.js': { Icon: FaNodeJs, experience: 'Desarrollo de APIs RESTful, manejo de middlewares con Express y conexión a bases de datos.', years: '3 años' },
+  MongoDB: { Icon: SiMongodb, experience: 'Modelado de datos NoSQL con Mongoose, optimización de consultas y agregaciones complejas.', years: '3 años' },
+  GSAP: { Icon: GsapLogo, experience: 'Creación de animaciones complejas, líneas de tiempo, y experiencias interactivas con ScrollTrigger y Draggable.', years: '2 años' },
+  'Tailwind CSS': { Icon: SiTailwindcss, experience: 'Diseño de interfaces modernas y responsivas con un enfoque utility-first y personalización de temas.', years: '4 años' },
+  'Framer Motion': { Icon: SiFramer, experience: 'Animaciones declarativas, transiciones de página fluidas y gestos para una UX dinámica.', years: '3 años' },
+  Git: { Icon: FaGitAlt, experience: 'Control de versiones profesional, flujos de trabajo (Git Flow) y colaboración efectiva en equipo.', years: '5 años' },
+  Figma: { Icon: FaFigma, experience: 'Diseño de prototipos interactivos, mockups de alta fidelidad y sistemas de diseño para una UX consistente.', years: '2 años' },
+  Vercel: { Icon: SiVercel, experience: 'Despliegue contínuo, monitorización y gestión de variables de entorno para aplicaciones Next.js.', years: '3 años' },
+  Firebase: { Icon: SiFirebase, experience: 'Autenticación, bases de datos en tiempo real (Firestore) y hosting para aplicaciones web full-stack.', years: '3 años' },
+  Vuejs: { Icon: FaVuejs, experience: 'Desarrollo de aplicaciones reactivas con el ecosistema de Vue, incluyendo Vuex y Vue Router.', years: '2 años' },
+  Postman: { Icon: SiPostman, experience: 'Pruebas y depuración de APIs RESTful, creación de colecciones y automatización de tests.', years: '4 años' },
+  Docker: { Icon: FaDocker, experience: 'Containerización de aplicaciones, orquestación con Docker Compose y despliegue en entornos reproducibles.', years: '1 año' },
+  Python: { Icon: FaPython, experience: 'Desarrollo de scripts, automatización, APIs con FastAPI y herramientas de ciberseguridad.', years: '2 años' },
+  pnpm: { Icon: SiPnpm, experience: 'Gestor de paquetes eficiente con espacio en disco y estricto para proyectos Node.js.', years: '1 año' },
+  FastAPI: { Icon: SiFastapi, experience: 'Construcción de APIs de alto rendimiento con Python, documentación automática y validación de datos.', years: '1 año' },
+  Bash: { Icon: SiGnubash, experience: 'Automatización de tareas, scripting de sistema y administración de servidores Linux.', years: '2 años' },
 };
 
 interface Project { title: string; tags: string[]; }
@@ -142,6 +147,12 @@ const About = () => {
               <p className="text-violet-300 border-l-4 border-violet-500 pl-4 italic">
                   Actualmente, estoy explorando nuevas oportunidades para aplicar mis habilidades y seguir creciendo como desarrollador full-stack.
               </p>
+              <div className="flex items-center gap-2 text-sm text-zinc-500">
+                <span className="px-2 py-1 bg-violet-500/10 border border-violet-500/30 rounded-md font-medium text-violet-300">
+                  Técnico en Telemática
+                </span>
+                <span>· 6to año completado</span>
+              </div>
             </div>
           </motion.div>
 

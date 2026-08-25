@@ -3,8 +3,8 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { FaReact, FaNodeJs, FaVuejs, FaGitAlt } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiFirebase, SiVercel, SiPostman, SiFigma } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython } from 'react-icons/fa';
+import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiFirebase, SiVercel, SiPostman, SiFigma, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
 
 // GSAP Logo SVG Component
 const GsapLogo = ({ className }: { className?: string }) => (
@@ -28,6 +28,11 @@ const technologies = [
   { Icon: SiVercel, name: 'Vercel' },
   { Icon: SiPostman, name: 'Postman' },
   { Icon: SiFigma, name: 'Figma' },
+  { Icon: FaDocker, name: 'Docker' },
+  { Icon: FaPython, name: 'Python' },
+  { Icon: SiPnpm, name: 'pnpm' },
+  { Icon: SiFastapi, name: 'FastAPI' },
+  { Icon: SiGnubash, name: 'Bash' },
 ];
 
 const TechMarquee = () => {
