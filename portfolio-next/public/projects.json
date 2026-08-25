@@ -3,7 +3,7 @@
         "title": "App de Gestión Estudiantil",
         "description": "Una aplicación para la gestión de información estudiantil, pasantías y horas de labor social.",
         "technicalDescription": "React, Tailwind CSS, TypeScript",
-        "image": "/pasant-log-desing.PNG",
+        "image": "/pasant-log.PNG",
         "tags": ["React", "Tailwind CSS", "TypeScript", "Next.js", "Firebase", "Framer Motion", "Vercel"],
         "liveUrl": "https://pasant-log.vercel.app",
         "repoUrl": "https://github.com/Hazuru00"
@@ -12,7 +12,7 @@
         "title": "Hazuru Portfolio v1",
         "description": "La primera versión de mi portafolio, construida con React y Vite.",
         "technicalDescription": "React, Vite, Tailwind CSS, Framer Motion",
-        "image": "/portfolio-1-desing.PNG",
+        "image": "/portfolio-v1.PNG",
         "tags": ["React", "Vite", "Tailwind CSS", "Framer Motion", "TypeScript", "Vercel"],
         "liveUrl": "https://hazuru.vercel.app/",
         "repoUrl": "https://github.com/Hazuru00/Portafolio-Personal-WebDeveloper"
@@ -21,7 +21,7 @@
         "title": "Hyperlink HUD",
         "description": "Una experiencia de enlaces interactiva y cyberpunk inspirada en interfaces HUD de alta tecnología. Control total de identidad desde un único archivo de configuración.",
         "technicalDescription": "Next.js 14, Framer Motion, GSAP",
-        "image": "/portfolio-1-desing.PNG",
+        "image": "/hyperlink-hud.PNG",
         "tags": ["Next.js", "TypeScript", "Framer Motion", "GSAP", "Tailwind CSS"],
         "repoUrl": "https://github.com/Hazuru00/hyperlink-hud"
     },
@@ -39,14 +39,5 @@
         "technicalDescription": "Node.js, Discord.js, Express, Socket.io",
         "image": "/dashboard.PNG",
         "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"]
-    },
-    {
-        "title": "Spotify Readme Widget",
-        "description": "Widget personalizado de Spotify now-playing desplegado en Vercel, con integración a la API de Spotify y diseño custom.",
-        "technicalDescription": "Next.js, TypeScript, Spotify API",
-        "image": "/portfolio-1-desing.PNG",
-        "tags": ["Next.js", "TypeScript", "Spotify API", "Vercel"],
-        "liveUrl": "https://spotify-readme-five-lovat.vercel.app",
-        "repoUrl": "https://github.com/Hazuru00/spotify-readme-vercel"
     }
 ]
