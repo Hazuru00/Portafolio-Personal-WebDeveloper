@@ -20,6 +20,9 @@ const Hero = () => {
           <motion.div
             drag
             dragConstraints={containerRef}
+            dragSnapToOrigin
+            dragDirectionLock
+            dragElastic={0.2}
             className="w-40 h-40 md:w-48 md:h-48 cursor-grab active:cursor-grabbing rounded-full"
             initial={{ scale: 0, y: 50, rotate: -45 }}
             animate={{

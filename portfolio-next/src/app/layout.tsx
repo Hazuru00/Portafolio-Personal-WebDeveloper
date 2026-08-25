@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Georama, Kode_Mono } from "next/font/google";
 import "./globals.css";
-import "../index.css";
 
 const georama = Georama({ subsets: ["latin"] });
-const kodeMono = Kode_Mono({ subsets: ["latin"] });
+const kodeMono = Kode_Mono({ subsets: ["latin"], variable: "--font-kode-mono" });
 
 export const metadata: Metadata = {
   title: "Portafolio - Programador Jr",
@@ -32,14 +31,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-        />
          <meta name="google-site-verification" content="m1X4P8Hto3WYo5URabZWyO_cE47k-wNKNbcY4s2H0Sc" />
       </head>
-      <body className={`${georama.className} ${kodeMono.className}`}>{children}</body>
+      <body className={`${kodeMono.className} ${georama.variable}`}>{children}</body>
     </html>
   );
 }

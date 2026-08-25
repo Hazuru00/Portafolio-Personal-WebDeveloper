@@ -113,9 +113,9 @@ const Projects = () => {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-500 ease-in-out group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                    className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 </div>

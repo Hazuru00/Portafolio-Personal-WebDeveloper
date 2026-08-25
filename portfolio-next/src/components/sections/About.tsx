@@ -18,13 +18,16 @@ const Profile = () => {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    if (profileRef.current && containerRef.current) {
-      Draggable.create(profileRef.current, {
-        type: 'x,y',
-        bounds: containerRef.current,
-        inertia: true,
-        zIndexBoost: false, // Evita que GSAP cambie el z-index
-      });
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(pointer: fine)').matches) {
+      if (profileRef.current && containerRef.current) {
+        Draggable.create(profileRef.current, {
+          type: 'x,y',
+          bounds: containerRef.current,
+          inertia: true,
+          zIndexBoost: false,
+        });
+      }
     }
   }, { scope: containerRef });
 
@@ -39,9 +42,9 @@ const Profile = () => {
         <Image
           src="/PImage.jpeg"
           alt="Foto de perfil de Hazuru"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg pointer-events-none"
+          fill
+          sizes="(max-width: 768px) 280px, 300px"
+          className="rounded-lg pointer-events-none object-cover w-full h-full"
           priority
         />
       </motion.div>
@@ -227,7 +230,7 @@ const About = () => {
       <AnimatePresence>
         {selectedTech && (
           <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

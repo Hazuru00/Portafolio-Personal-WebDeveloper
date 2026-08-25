@@ -14,29 +14,17 @@ const navLinks = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // 1. Función para detectar el tamaño de pantalla
   useEffect(() => {
     setMounted(true);
-    const checkRes = () => {
-      setIsMobile(window.innerWidth < 768); // 768px es el estándar de 'md'
-      if (window.innerWidth >= 768) setIsOpen(false); // Cierra el menú móvil si agrandan la pantalla
-    };
-
-    checkRes();
-    window.addEventListener('resize', checkRes);
-    return () => window.removeEventListener('resize', checkRes);
   }, []);
 
-  // 2. Bloqueo de scroll
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  // Si no ha cargado en el cliente, no renderizamos para evitar parpadeos
   if (!mounted) return null;
 
   return (
@@ -51,37 +39,35 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Navegación Desktop - SOLO se muestra si !isMobile */}
-            {!isMobile && (
-              <nav className="flex items-center space-x-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="text-zinc-400 hover:text-violet-400 text-sm font-semibold transition-all duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </nav>
-            )}
+            {/* Navegación Desktop */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-zinc-400 hover:text-violet-400 text-sm font-semibold transition-all duration-300"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
 
-            {/* Botón Menú Móvil - SOLO se muestra si isMobile */}
-            {isMobile && (
+            {/* Botón Menú Móvil */}
+            <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 text-zinc-300 hover:text-white transition-all"
               >
                 {isOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
-            )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Menú Móvil Full Screen */}
       <AnimatePresence>
-        {isMobile && isOpen && (
+        {isOpen && (
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}

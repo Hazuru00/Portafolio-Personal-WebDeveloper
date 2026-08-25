@@ -118,33 +118,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-// Add this to your globals.css or a shared stylesheet
-// to avoid repetition and ensure consistency.
-const styles = `
-  .form-input {
-    width: 100%;
-    background-color: rgb(24 24 27 / 0.7);
-    border: 1px solid rgb(63 63 70);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    color: rgb(244 244 245);
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-  .form-input:focus {
-    outline: none;
-    border-color: rgb(139 92 246);
-    box-shadow: 0 0 0 3px rgb(139 92 246 / 0.3);
-  }
-  .form-input::placeholder {
-    color: rgb(113 113 122);
-  }
-`;
-
-// Inject styles into the head
-if (typeof window !== 'undefined') {
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
-}
