@@ -39,5 +39,13 @@
         "technicalDescription": "Node.js, Discord.js, Express, Socket.io",
         "image": "/dashboard.PNG",
         "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"]
+    },
+    {
+        "title": "Node Virtual Gamepads",
+        "description": "Convierte tu smartphone en un gamepad, teclado o touchpad virtual para Linux vía el navegador. Fork mejorado con Docker y soporte PWA.",
+        "technicalDescription": "Node.js, Socket.io, uinput, Docker",
+        "image": "/gamepad.PNG",
+        "tags": ["JavaScript", "Socket.io", "Linux", "uinput", "Docker", "PWA"],
+        "repoUrl": "https://github.com/Hazuru00/node-virtual-gamepads"
     }
 ]
