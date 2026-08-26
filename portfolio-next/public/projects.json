@@ -38,11 +38,12 @@
         "description": "Bot de Discord con funcionalidades personalizadas para gestión de servidores, automatización de tareas y dashboard en tiempo real.",
         "technicalDescription": "Node.js, Discord.js, Express, Socket.io",
         "image": "/dashboard.PNG",
-        "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"]
+        "tags": ["JavaScript", "Discord.js", "Express", "Socket.io", "Docker"],
+        "repoUrl": "https://github.com/Hazuru00/hazuru-assistant"
     },
     {
         "title": "Node Virtual Gamepads",
-        "description": "Convierte tu smartphone en un gamepad, teclado o touchpad virtual para Linux vía el navegador. Fork mejorado con Docker y soporte PWA.",
+        "description": "Convierte tu smartphone en un gamepad, teclado o touchpad virtual para Linux u Windows vía el navegador. Fork mejorado con Docker y soporte PWA.",
         "technicalDescription": "Node.js, Socket.io, uinput, Docker",
         "image": "/gamepad.PNG",
         "tags": ["JavaScript", "Socket.io", "Linux", "uinput", "Docker", "PWA"],
