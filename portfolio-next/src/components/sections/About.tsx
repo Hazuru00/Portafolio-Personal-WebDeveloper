@@ -7,7 +7,7 @@ import { Draggable } from 'gsap/Draggable';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 import { FaReact, FaNodeJs, FaFigma, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaVest } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash } from 'react-icons/si';
+import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiVercel, SiPostman, SiFirebase, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash, SiGithubactions } from 'react-icons/si';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 gsap.registerPlugin(Draggable);
@@ -89,8 +89,10 @@ const techData = {
   FastAPI: { Icon: SiFastapi, experience: 'Construcción de APIs de alto rendimiento con Python, documentación automática y validación de datos.', years: '1 año' },
   Bash: { Icon: SiGnubash, experience: 'Automatización de tareas, scripting de sistema y administración de servidores Linux.', years: '2 años' },
   OpenCode: { Icon: OpenCodeLogo, experience: 'Asistente de desarrollo con IA para código, debugging y arquitectura de software.', years: '1 año' },
+  n8n: { Icon: SiN8N, experience: 'Automatización de flujos de trabajo visuales, integración de APIs y orquestación de procesos.', years: '1 año' },
+  Ollama: { Icon: SiOllama, experience: 'Ejecución local de LLMs para desarrollo con IA privada y sin costos de API.', years: '1 año' },
   'Docker Compose': { Icon: FaDocker, experience: 'Orquestación de múltiples contenedores para entornos de desarrollo y producción reproducibles.', years: '1 año' },
-  'CI/CD': { Icon: FaGithub, experience: 'Pipelines automatizados con GitHub Actions para testing, build y deploy continuo.', years: '1 año' },
+  'CI/CD': { Icon: SiGithubactions, experience: 'Pipelines automatizados con GitHub Actions para testing, build y deploy continuo.', years: '1 año' },
   Testing: { Icon: FaVest, experience: 'Escritura de tests unitarios y de integración para garantizar calidad y confiabilidad del código.', years: '1 año' },
 };
 
