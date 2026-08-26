@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Georama, Kode_Mono } from "next/font/google";
 import "./globals.css";
 
-const georama = Georama({ subsets: ["latin"] });
+const georama = Georama({ subsets: ["latin"], variable: "--font-georama" });
 const kodeMono = Kode_Mono({ subsets: ["latin"], variable: "--font-kode-mono" });
 
 export const metadata: Metadata = {
