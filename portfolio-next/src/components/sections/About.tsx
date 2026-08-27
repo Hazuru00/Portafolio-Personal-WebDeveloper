@@ -199,9 +199,6 @@ const About = () => {
             <motion.div
               layoutId={`tech-card-${selectedTech}`}
               className="fixed z-[201] flex items-center justify-center p-4 pointer-events-none"
-              initial={false}
-              animate={false}
-              exit={false}
               transition={{ layout: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } }}
             >
               <motion.div
