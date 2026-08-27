@@ -54,17 +54,16 @@ const Profile = () => {
 
 // GSAP Logo SVG Component
 const GsapLogo = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style={{ width: '1em', height: '1em' }}>
     <path fill="currentColor" d="M448 96v320h-64V234.4L224 429.6 64 234.4V416H0V96h64v123.6l160 197.2 160-197.2V96h64z"/>
   </svg>
 );
 
 // OpenCode Logo SVG Component
 const OpenCodeLogo = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="16 18 22 12 16 6"></polyline>
-    <polyline points="8 6 2 12 8 18"></polyline>
-    <line x1="14" y1="4" x2="10" y2="20"></line>
+  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" fill="none" style={{ width: '1em', height: '1em' }}>
+    <path d="M180 240H60V120H180V240Z" fill="currentColor" opacity="0.7"/>
+    <path d="M180 60H60V240H180V60ZM240 300H0V0H240V300Z" fill="currentColor"/>
   </svg>
 );
 
