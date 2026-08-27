@@ -151,6 +151,7 @@ const About = () => {
                         onClick={() => setSelectedTech(tech)}
                         className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-lg p-3 sm:p-4 flex flex-col items-center justify-center aspect-square cursor-pointer transition-all duration-300 hover:bg-violet-900/50 hover:border-violet-700 hover:-translate-y-1"
                         whileHover={{ scale: 1.05 }}
+                        transition={{ layout: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] } }}
                         >
                         <Icon className="text-3xl sm:text-4xl text-zinc-300" />
                         <p className="mt-2 text-[11px] sm:text-xs font-semibold text-center text-zinc-200">{tech}</p>
@@ -184,57 +185,80 @@ const About = () => {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {selectedTech && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedTech(null)}
-          >
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-[200]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setSelectedTech(null)}
+            />
             <motion.div
               layoutId={`tech-card-${selectedTech}`}
-              className="relative w-full max-w-md bg-zinc-900 border border-violet-700/80 rounded-2xl p-8 shadow-2xl shadow-violet-900/40"
-              onClick={e => e.stopPropagation()}
+              className="fixed z-[201] flex items-center justify-center p-4 pointer-events-none"
+              initial={false}
+              animate={false}
+              exit={false}
+              transition={{ layout: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } }}
             >
+              <motion.div
+                className="relative w-full max-w-md bg-zinc-900 border border-violet-700/80 rounded-2xl p-8 shadow-2xl shadow-violet-900/40 pointer-events-auto"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
                     {createElement(techData[selectedTech as keyof typeof techData].Icon, { className: 'text-5xl text-violet-400' })}
                     <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-100 to-zinc-400">{selectedTech}</h3>
-                    </div>
-                    <motion.button 
-                        onClick={() => setSelectedTech(null)} 
-                        className="text-zinc-500 transition-colors hover:text-white"
-                        whileHover={{ scale: 1.1, rotate: 90 }}
-                        > 
-                        <X className="h-7 w-7" />
-                    </motion.button>
-                </div>
-              <div className="space-y-5">
-                <div>
-                  <h4 className="text-md font-semibold text-violet-300 mb-2">Años de Experiencia</h4>
-                  <p className="text-zinc-300 text-lg">{techData[selectedTech as keyof typeof techData].years}</p>
-                </div>
-                <div>
-                  <h4 className="text-md font-semibold text-violet-300 mb-2">Experiencia Específica</h4>
-                  <p className="text-zinc-300 leading-relaxed">{techData[selectedTech as keyof typeof techData].experience}</p>
-                </div>
-                {relevantProjects.length > 0 && (
-                  <div>
-                    <h4 className="text-md font-semibold text-violet-300 mb-3">Proyectos Relevantes</h4>
-                    <ul className="space-y-2">
-                      {relevantProjects.map(p => (
-                        <li key={p.title} className="text-zinc-400 bg-zinc-800/50 rounded-md px-3 py-2 text-sm border border-zinc-700">
-                          {p.title}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                )}
-              </div>
+                  <motion.button
+                    onClick={() => setSelectedTech(null)}
+                    className="text-zinc-500 hover:text-white"
+                    initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                    transition={{ duration: 0.2, delay: 0.1 }}
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <X className="h-7 w-7" />
+                  </motion.button>
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, delay: 0.15, staggerChildren: 0.08 }}
+                >
+                  <div>
+                    <h4 className="text-md font-semibold text-violet-300 mb-2">Años de Experiencia</h4>
+                    <p className="text-zinc-300 text-lg">{techData[selectedTech as keyof typeof techData].years}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-md font-semibold text-violet-300 mb-2">Experiencia Específica</h4>
+                    <p className="text-zinc-300 leading-relaxed">{techData[selectedTech as keyof typeof techData].experience}</p>
+                  </div>
+                  {relevantProjects.length > 0 && (
+                    <div>
+                      <h4 className="text-md font-semibold text-violet-300 mb-3">Proyectos Relevantes</h4>
+                      <ul className="space-y-2">
+                        {relevantProjects.map(p => (
+                          <li key={p.title} className="text-zinc-400 bg-zinc-800/50 rounded-md px-3 py-2 text-sm border border-zinc-700">
+                            {p.title}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </motion.div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.section>
