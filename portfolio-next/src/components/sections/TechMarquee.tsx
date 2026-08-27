@@ -3,52 +3,7 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { FaReact, FaNodeJs, FaVuejs, FaGitAlt, FaDocker, FaPython, FaGithub, FaVest } from 'react-icons/fa';
-import { SiNextdotjs, SiTypescript, SiMongodb, SiTailwindcss, SiFramer, SiFirebase, SiVercel, SiPostman, SiFigma, SiPnpm, SiFastapi, SiN8N, SiOllama, SiGnubash, SiGithubactions, SiSupabase } from 'react-icons/si';
-
-// GSAP Logo SVG Component
-const GsapLogo = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style={{ width: '1em', height: '1em' }}>
-    <path fill="currentColor" d="M448 96v320h-64V234.4L224 429.6 64 234.4V416H0V96h64v123.6l160 197.2 160-197.2V96h64z"/>
-  </svg>
-);
-
-// OpenCode Logo SVG Component
-const OpenCodeLogo = ({ className }: { className?: string }) => (
-  <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" fill="none" style={{ width: '1em', height: '1em' }}>
-    <path d="M180 240H60V120H180V240Z" fill="currentColor" opacity="0.7"/>
-    <path d="M180 60H60V240H180V60ZM240 300H0V0H240V300Z" fill="currentColor"/>
-  </svg>
-);
-
-const technologies = [
-  { Icon: FaReact, name: 'React' },
-  { Icon: SiNextdotjs, name: 'Next.js' },
-  { Icon: FaVuejs, name: 'Vue.js' },
-  { Icon: SiTypescript, name: 'TypeScript' },
-  { Icon: FaNodeJs, name: 'Node.js' },
-  { Icon: SiMongodb, name: 'MongoDB' },
-  { Icon: GsapLogo, name: 'GSAP' },
-  { Icon: SiTailwindcss, name: 'Tailwind CSS' },
-  { Icon: SiFramer, name: 'Framer Motion' },
-  { Icon: SiFirebase, name: 'Firebase' },
-  { Icon: FaGitAlt, name: 'Git' },
-  { Icon: SiVercel, name: 'Vercel' },
-  { Icon: SiPostman, name: 'Postman' },
-  { Icon: SiFigma, name: 'Figma' },
-  { Icon: FaDocker, name: 'Docker' },
-  { Icon: FaPython, name: 'Python' },
-  { Icon: SiPnpm, name: 'pnpm' },
-  { Icon: SiFastapi, name: 'FastAPI' },
-  { Icon: SiSupabase, name: 'Supabase' },
-  { Icon: SiGnubash, name: 'Bash' },
-  { Icon: OpenCodeLogo, name: 'OpenCode' },
-  { Icon: SiN8N, name: 'n8n' },
-  { Icon: SiOllama, name: 'Ollama' },
-  { Icon: FaDocker, name: 'Docker Compose' },
-  { Icon: SiGithubactions, name: 'GitHub Actions' },
-  { Icon: FaVest, name: 'Testing' },
-];
+import { techItems } from '@/data/tech';
 
 const TechMarquee = () => {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -81,7 +36,7 @@ const TechMarquee = () => {
         </div>
       <div ref={wrapperRef} className="overflow-hidden whitespace-nowrap">
         <div ref={marqueeRef} className="flex">
-          {[...technologies, ...technologies].map(({ Icon, name }, index) => (
+          {[...techItems, ...techItems].map(({ Icon, name }, index) => (
             <div key={index} className="flex items-center mx-6 sm:mx-8 group shrink-0">
               <Icon className="text-4xl sm:text-5xl text-zinc-400 transition-colors duration-300 group-hover:text-violet-400" />
               <span className="ml-4 text-lg sm:text-xl font-semibold text-zinc-400 transition-colors duration-300 group-hover:text-white">{name}</span>
