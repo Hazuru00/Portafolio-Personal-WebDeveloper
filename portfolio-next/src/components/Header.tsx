@@ -14,11 +14,32 @@ const navLinks = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState('#home');
+  const [hovered, setHovered] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
+
+  // Scroll spy: resalta el link de la sección visible
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.querySelector(l.href))
+      .filter((el): el is Element => el !== null);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const current = hovered ?? active;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100]">
@@ -33,14 +54,25 @@ export default function Header() {
             </div>
 
             {/* Navegación Desktop */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-zinc-400 hover:text-violet-400 text-sm font-semibold transition-all duration-300"
+                  onMouseEnter={() => setHovered(link.href)}
+                  onMouseLeave={() => setHovered(null)}
+                  className={`relative px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+                    current === link.href ? 'text-violet-400' : 'text-zinc-400 hover:text-zinc-200'
+                  }`}
                 >
-                  {link.name}
+                  {current === link.href && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute inset-0 rounded-lg bg-violet-500/10 border border-violet-500/25"
+                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.name}</span>
                 </Link>
               ))}
             </nav>

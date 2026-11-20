@@ -74,7 +74,17 @@ const Hero = () => {
           className="relative z-10 mt-12" // Increased margin-top to space it from the draggable element
         >
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-b from-zinc-50 to-zinc-300">
-            Desarrollador y <span className="text-violet-400">Diseñador Web</span>
+            {['Desarrollador', 'Fullstack', 'Semi Senior'].map((word, i) => (
+              <motion.span
+                key={word}
+                initial={{ opacity: 0, y: 40, rotateX: -40 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.7, delay: 0.35 + i * 0.15, ease: [0.21, 0.65, 0.35, 0.95] }}
+                className={`inline-block mr-3 ${i > 0 ? 'text-violet-400' : ''}`}
+              >
+                {word}
+              </motion.span>
+            ))}
           </h1>
           <p className="text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto">
             Creando experiencias digitales memorables con un enfoque en el rendimiento y la estética.

@@ -1,52 +1,44 @@
 'use client';
 import { sendEmail } from '@/actions/sendEmail';
 import { useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
-
-gsap.registerPlugin(ScrollTrigger);
+import { duration, ease } from '@/lib/motion';
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'rateLimit'; message: string } | null>(null);
   const [pending, setPending] = useState(false);
-
-  useGSAP(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    gsap.from(el.querySelector('.section-title'), {
-      opacity: 0, y: -20, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 80%' }
-    });
-
-    gsap.from(el.querySelector('.section-subtitle'), {
-        opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 80%' }
-    });
-
-    gsap.from(el.querySelector('.contact-card'), {
-        opacity: 0, scale: 0.95, duration: 1, ease: 'expo.out',
-        scrollTrigger: { trigger: '.contact-card', start: 'top 80%' }
-    });
-
-  }, { scope: sectionRef });
 
   return (
     <section id="contact" ref={sectionRef} className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="section-title text-4xl sm:text-5xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-zinc-50 to-zinc-300">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: duration.slow, ease: ease.out }}
+            className="text-4xl sm:text-5xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-zinc-50 to-zinc-300"
+          >
             Hablemos
-          </h2>
-          <p className="section-subtitle text-lg sm:text-xl text-violet-400 mt-2 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: duration.slow, delay: 0.2, ease: ease.out }}
+            className="text-lg sm:text-xl text-violet-400 mt-2 max-w-2xl mx-auto"
+          >
             ¿Interesado en colaborar? Envíame un mensaje y empecemos a crear algo increíble.
-          </p>
+          </motion.p>
         </div>
 
-        <div className="contact-card max-w-4xl mx-auto bg-zinc-900/50 border border-zinc-800 rounded-2xl shadow-2xl shadow-violet-900/20 backdrop-blur-lg p-8 sm:p-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: duration.slow + 0.2, ease: ease.out }}
+          className="max-w-4xl mx-auto bg-zinc-900/50 border border-zinc-800 rounded-2xl shadow-2xl shadow-violet-900/20 backdrop-blur-lg p-8 sm:p-12"
+        >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {/* Información y Redes Sociales */}
                 <div className="md:col-span-1 flex flex-col justify-between">
@@ -111,7 +103,7 @@ const Contact = () => {
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

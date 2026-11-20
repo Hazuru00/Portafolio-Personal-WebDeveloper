@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -13,6 +13,92 @@ interface Project {
   liveUrl?: string;
   repoUrl?: string;
 }
+
+// Card con tilt 3D que sigue al cursor (se desactiva con prefers-reduced-motion)
+const ProjectCard = ({ project }: { project: Project }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const smoothX = useSpring(rotateX, { stiffness: 250, damping: 20 });
+  const smoothY = useSpring(rotateY, { stiffness: 250, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduceMotion || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateX.set(py * 10);
+    rotateY.set(-px * 10);
+  };
+
+  const resetTilt = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={resetTilt}
+      style={{ rotateX: smoothX, rotateY: smoothY, transformPerspective: 900 }}
+      whileHover={reduceMotion ? undefined : { y: -8 }}
+      className="group relative bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-lg transition-[border-color,box-shadow] duration-300 hover:border-violet-700/80 hover:shadow-violet-900/30 hover:shadow-2xl flex-shrink-0 w-11/12 sm:w-5/6 md:w-[45vw] lg:w-[30vw]"
+    >
+      <div className="relative h-60 w-full overflow-hidden">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
+          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+      </div>
+
+      <div className="p-6 relative z-10">
+        <h3 className="text-2xl font-bold text-zinc-100 mb-3">{project.title}</h3>
+        <p className="text-zinc-400 mb-5 text-base leading-relaxed h-24 overflow-hidden [mask-image:linear-gradient(to_bottom,white_60%,transparent)]">
+          {project.description}
+        </p>
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.tags.map(tag => (
+            <span key={tag} className="text-xs font-semibold px-3 py-1 bg-violet-500/10 border border-violet-900/50 text-violet-300 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex justify-end items-center gap-4">
+          {project.repoUrl && (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-zinc-400 transition-colors duration-300 hover:text-white"
+              aria-label={`Repositorio de ${project.title}`}
+            >
+              <FaGithub size={22} />
+              <span className="text-sm font-medium">Código</span>
+            </a>
+          )}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-zinc-900 bg-violet-400 rounded-lg transition-all duration-300 hover:bg-violet-300 hover:scale-105"
+              aria-label={`Ver demo de ${project.title}`}
+            >
+              <FaExternalLinkAlt size={16} />
+              <span>Ver Demo</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -104,62 +190,8 @@ const Projects = () => {
             dragConstraints={{ right: 0, left: -width }}
             whileTap={{ cursor: 'grabbing' }}
           >
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                className="group relative bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:border-violet-700/80 hover:shadow-violet-900/30 hover:shadow-2xl hover:-translate-y-2 flex-shrink-0 w-11/12 sm:w-5/6 md:w-[45vw] lg:w-[30vw]"
-              >
-                <div className="relative h-60 w-full overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                    className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                </div>
-
-                <div className="p-6 relative z-10">
-                  <h3 className="text-2xl font-bold text-zinc-100 mb-3">{project.title}</h3>
-                  <p className="text-zinc-400 mb-5 text-base leading-relaxed h-24 overflow-hidden [mask-image:linear-gradient(to_bottom,white_60%,transparent)]">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-xs font-semibold px-3 py-1 bg-violet-500/10 border border-violet-900/50 text-violet-300 rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-end items-center gap-4">
-                    {project.repoUrl && (
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-zinc-400 transition-colors duration-300 hover:text-white"
-                        aria-label={`Repositorio de ${project.title}`}
-                      >
-                        <FaGithub size={22} />
-                        <span className="text-sm font-medium">Código</span>
-                      </a>
-                    )}
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-zinc-900 bg-violet-400 rounded-lg transition-all duration-300 hover:bg-violet-300 hover:scale-105"
-                        aria-label={`Ver demo de ${project.title}`}
-                      >
-                        <FaExternalLinkAlt size={16} />
-                        <span>Ver Demo</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
             ))}
           </motion.div>
         </motion.div>

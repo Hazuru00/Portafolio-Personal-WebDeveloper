@@ -15,12 +15,28 @@ const TechMarquee = () => {
 
     const distance = marquee.scrollWidth / 2;
 
-    gsap.to(marquee, {
+    const tween = gsap.to(marquee, {
       x: -distance,
       duration: 40,
       ease: 'linear',
       repeat: -1,
     });
+
+    // Pausa al pasar el mouse/touch, retoma al salir
+    const wrapper = wrapperRef.current;
+    const pause = () => tween.pause();
+    const play = () => tween.play();
+    wrapper?.addEventListener('mouseenter', pause);
+    wrapper?.addEventListener('mouseleave', play);
+    wrapper?.addEventListener('touchstart', pause, { passive: true });
+    wrapper?.addEventListener('touchend', play);
+
+    return () => {
+      wrapper?.removeEventListener('mouseenter', pause);
+      wrapper?.removeEventListener('mouseleave', play);
+      wrapper?.removeEventListener('touchstart', pause);
+      wrapper?.removeEventListener('touchend', play);
+    };
   }, { scope: marqueeRef });
 
   return (
@@ -34,7 +50,10 @@ const TechMarquee = () => {
                 Siempre aprendiendo y mejorando mis habilidades con las mejores herramientas.
             </p>
         </div>
-      <div ref={wrapperRef} className="overflow-hidden whitespace-nowrap">
+      <div
+        ref={wrapperRef}
+        className="overflow-hidden whitespace-nowrap [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+      >
         <div ref={marqueeRef} className="flex">
           {[...techItems, ...techItems].map(({ Icon, name }, index) => (
             <div key={index} className="flex items-center mx-6 sm:mx-8 group shrink-0">
