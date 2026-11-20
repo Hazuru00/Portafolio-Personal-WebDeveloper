@@ -117,7 +117,7 @@ const About = () => {
                 Sobre Mí
               </h2>
               <p>
-                Apasionado por la tecnología y el diseño, mi objetivo es fusionar ambos mundos para construir interfaces intuitivas y de alto rendimiento. Con experiencia en el stack MERN y un profundo interés en las nuevas arquitecturas web, busco constantemente superar los límites de lo posible.
+                Como desarrollador fullstack semi senior, construyo arquitecturas escalables, agilizo procesos con IA y automatizaciones, y audito código para elevar la calidad y la seguridad. Con experiencia en el stack MERN y un profundo interés en las nuevas arquitecturas web, busco constantemente superar los límites de lo posible.
               </p>
               <p className="text-violet-300 border-l-4 border-violet-500 pl-4 italic">
                   Actualmente, estoy explorando nuevas oportunidades para aplicar mis habilidades y seguir creciendo como desarrollador full-stack.
