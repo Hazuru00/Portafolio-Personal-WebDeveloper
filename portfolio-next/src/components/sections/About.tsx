@@ -4,12 +4,13 @@ import { useState, useEffect, useMemo, useRef, createElement } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Draggable } from 'gsap/Draggable';
+import { InertiaPlugin } from 'gsap/InertiaPlugin';
 import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { techItems, techData, GsapLogo, OpenCodeLogo } from '@/data/tech';
+import { techData } from '@/data/tech';
 
-gsap.registerPlugin(Draggable);
+gsap.registerPlugin(Draggable, InertiaPlugin);
 
 // Profile Component with GSAP Draggable
 const Profile = () => {
@@ -32,21 +33,22 @@ const Profile = () => {
 
   return (
     <div ref={containerRef} className="relative w-full aspect-square max-w-[280px] mx-auto lg:max-w-none lg:w-full h-[300px] rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900/50 p-2">
-      <motion.div 
-        ref={profileRef} 
-        className='w-full h-full relative cursor-grab active:cursor-grabbing'
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 300 }}
-      >
-        <Image
-          src="/PImage.jpeg"
-          alt="Foto de perfil de Hazuru"
-          fill
-          sizes="(max-width: 768px) 280px, 300px"
-          className="rounded-lg pointer-events-none object-cover w-full h-full"
-          priority
-        />
-      </motion.div>
+      <div ref={profileRef} className="w-full h-full relative cursor-grab active:cursor-grabbing">
+        <motion.div
+          className="w-full h-full"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <Image
+            src="/PImage.jpeg"
+            alt="Foto de perfil de Hazuru"
+            fill
+            sizes="(max-width: 768px) 280px, 300px"
+            className="rounded-lg pointer-events-none object-cover w-full h-full"
+            priority
+          />
+        </motion.div>
+      </div>
     </div>
   );
 };
@@ -197,16 +199,12 @@ const About = () => {
               onClick={() => setSelectedTech(null)}
             />
             <motion.div
-              layoutId={`tech-card-${selectedTech}`}
-              className="fixed z-[201] flex items-center justify-center p-4 pointer-events-none"
-              transition={{ layout: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } }}
+              className="fixed inset-0 z-[201] flex items-center justify-center p-4 pointer-events-none"
             >
               <motion.div
+                layoutId={`tech-card-${selectedTech}`}
                 className="relative w-full max-w-md bg-zinc-900 border border-violet-700/80 rounded-2xl p-8 shadow-2xl shadow-violet-900/40 pointer-events-auto"
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                transition={{ layout: { duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] } }}
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-4">

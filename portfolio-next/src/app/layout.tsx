@@ -6,6 +6,7 @@ const georama = Georama({ subsets: ["latin"], variable: "--font-georama" });
 const kodeMono = Kode_Mono({ subsets: ["latin"], variable: "--font-kode-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hazuru.vercel.app"),
   title: "Portafolio - Programador Jr",
   description: "Hola soy HazuDev este es mi portafolio y presentación personal como profesional contiene los lenguajes que manejo proyectos y Mas!",
   openGraph: {
