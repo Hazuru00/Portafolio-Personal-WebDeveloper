@@ -55,7 +55,7 @@ export function toGitHubStats(profile: unknown, repos: unknown): GitHubStats {
   // Usa filter sobre el array y luego filter isRecord para seguridad; count después.
   const repoRecords: Record<string, unknown>[] = [];
   for (const r of repoList) {
-    if (isRecord(r) && typeof (r as Record<string, unknown>).stargazers_count === 'number' && (r as Record<string, unknown>).stargazers_count > 0) {
+    if (isRecord(r) && typeof r.stargazers_count === 'number' && r.stargazers_count > 0) {
       repoRecords.push(r);
     }
   }
@@ -95,13 +95,11 @@ async function fetchContributionsFromEvents(): Promise<number> {
         count += 1; // cada PushEvent cuenta como un lote de commits; lo contamos como 1 evento
       } else if (type === 'PullRequestEvent') {
         const payload = event.payload;
-        if (typeof payload === 'object' && payload !== null) {
-          const pr = payload.pull_request;
-          if (typeof pr === 'object' && pr !== null) {
-            const action = pr.action as string | undefined;
-            if (action === 'merged') {
-              count += 1;
-            }
+        if (typeof payload === 'object' && payload !== null && 'pull_request' in payload) {
+          // tipo más flojo para que compile; GitHub API real siempre tiene esta estructura
+          const pr = payload as { pull_request: { action?: string } };
+          if (pr.pull_request && pr.pull_request.action === 'merged') {
+            count += 1;
           }
         }
       }
