@@ -4,12 +4,20 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
 import { duration, ease } from '@/lib/motion';
+import { isValidEmailFormat } from '@/lib/validateEmail';
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'rateLimit'; message: string } | null>(null);
   const [pending, setPending] = useState(false);
+  // Inputs controlados: React resetea el form al terminar la action,
+  // así los valores se conservan si la validación falla
+  const [values, setValues] = useState({ name: '', email: '', message: '' });
+  const handleChange =
+    (field: keyof typeof values) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setValues((v) => ({ ...v, [field]: e.target.value }));
 
   return (
     <section id="contact" ref={sectionRef} className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8">
@@ -60,14 +68,23 @@ const Contact = () => {
 
                 {/* Formulario de Contacto */}
                 <form action={async (formData) => {
+                  // Validación inmediata en cliente (el servidor valida otra vez)
+                  const email = String(formData.get('email') ?? '').trim();
+                  if (!isValidEmailFormat(email)) {
+                    setStatus({ type: 'error', message: 'El correo no tiene un formato válido (ej: tu@email.com).' });
+                    return;
+                  }
                   setPending(true);
                   setStatus(null);
                   const result = await sendEmail(formData);
                   setPending(false);
                   if (result.success) {
                     setStatus({ type: 'success', message: '¡Mensaje enviado correctamente!' });
+                    setValues({ name: '', email: '', message: '' });
+                  } else if (result.kind === 'rateLimit') {
+                    setStatus({ type: 'rateLimit', message: result.error ?? 'Demasiadas solicitudes.' });
                   } else if (result.error) {
-                    setStatus({ type: 'rateLimit', message: result.error });
+                    setStatus({ type: 'error', message: result.error });
                   } else {
                     setStatus({ type: 'error', message: 'Error al enviar. Intenta de nuevo.' });
                   }
@@ -75,16 +92,16 @@ const Contact = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-2">Nombre</label>
-                            <input type="text" id="name" name="name" required className="form-input" placeholder="Tu Nombre"/>
+                            <input type="text" id="name" name="name" required value={values.name} onChange={handleChange('name')} className="form-input" placeholder="Tu Nombre"/>
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email" required className="form-input" placeholder="tu@email.com"/>
+                            <input type="email" id="email" name="email" required value={values.email} onChange={handleChange('email')} className="form-input" placeholder="tu@email.com"/>
                         </div>
                     </div>
                     <div>
                         <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">Mensaje</label>
-                        <textarea id="message" name="message" rows={5} required className="form-input" placeholder="¿En qué puedo ayudarte?"></textarea>
+                        <textarea id="message" name="message" rows={5} required value={values.message} onChange={handleChange('message')} className="form-input" placeholder="¿En qué puedo ayudarte?"></textarea>
                     </div>
                     {status && (
                       <div className={`text-sm font-medium px-4 py-2 rounded-lg ${

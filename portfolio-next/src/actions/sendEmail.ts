@@ -4,27 +4,62 @@ import { Resend } from 'resend';
 import { headers } from 'next/headers';
 import { checkRateLimit } from '@/lib/rateLimit';
 import { escapeHtml, sanitizeHeaderValue } from '@/lib/sanitize';
+import { isValidEmailFormat } from '@/lib/validateEmail';
+import { checkEmailDomain } from '@/lib/checkEmailDomain';
 
-// Aquí usamos la variable de entorno, nunca el texto plano
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Aquí usamos la variable de entorno, nunca el texto plano.
+// Init perezoso: si falta la API key no crashea al cargar el módulo,
+// sino que devuelve un error controlado al enviar.
+function getResend(): Resend | null {
+  const key = process.env.RESEND_API_KEY;
+  return key ? new Resend(key) : null;
+}
 
-export async function sendEmail(formData: FormData) {
-  const name = (formData.get('name') as string) ?? '';
-  const email = (formData.get('email') as string) ?? '';
-  const message = (formData.get('message') as string) ?? '';
+// Resultado tipado: kind distingue rate limit de errores de validación
+type SendEmailResult =
+  | { success: true }
+  | { success: false; error: string; kind: 'rateLimit' | 'validation' }
+  | { success: false; error?: undefined; kind?: undefined };
+
+export async function sendEmail(formData: FormData): Promise<SendEmailResult> {
+  const name = ((formData.get('name') as string) ?? '').trim();
+  const email = ((formData.get('email') as string) ?? '').trim();
+  const message = ((formData.get('message') as string) ?? '').trim();
+
+  // Validación en servidor: formato estricto + dominio real (MX/A por DNS)
+  if (!isValidEmailFormat(email)) {
+    return { success: false, error: 'El correo no tiene un formato válido.', kind: 'validation' };
+  }
+  if (!(await checkEmailDomain(email))) {
+    return {
+      success: false,
+      error: 'El dominio del correo no existe o no puede recibir mensajes.',
+      kind: 'validation',
+    };
+  }
 
   // Rate limit por IP real (x-forwarded-for) para no bloquear a todos los visitantes
   const hdrs = await headers();
   const ip = hdrs.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   const { allowed, retryAfter } = checkRateLimit(ip);
   if (!allowed) {
-    return { success: false, error: `Demasiadas solicitudes. Intenta de nuevo en ${retryAfter}s` };
+    return {
+      success: false,
+      error: `Demasiadas solicitudes. Intenta de nuevo en ${retryAfter}s`,
+      kind: 'rateLimit',
+    };
   }
 
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
   const safeMessage = escapeHtml(message);
   const subjectName = sanitizeHeaderValue(name);
+
+  const resend = getResend();
+  if (!resend) {
+    console.error('RESEND_API_KEY no está configurada');
+    return { success: false };
+  }
 
   try {
     await resend.emails.send({
