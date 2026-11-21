@@ -3,6 +3,7 @@ export interface GitHubStats {
   totalStars: number;
   followers: number;
   contributions: number;
+  pullRequests: number;
 }
 
 export interface RepoInfo {
@@ -12,11 +13,36 @@ export interface RepoInfo {
   language: string | null;
   stars: number;
   updatedAt: string;
+  lastPush?: string;
+}
+
+export interface ContributionDay {
+  date: string;
+  contributionCount: number;
+  color: string;
+}
+
+export interface ContributionCalendar {
+  totalContributions: number;
+  weeks: Array<{
+    contributionDays: ContributionDay[];
+  }>;
 }
 
 export interface GitHubData {
   stats: GitHubStats | null;
   repos: RepoInfo[];
+  calendar: ContributionCalendar | null;
+}
+
+interface GraphQLContributionsResponse {
+  user: {
+    contributionsCollection: {
+      totalCommitContributions: number;
+      totalPullRequestContributions: number;
+      contributionCalendar: ContributionCalendar;
+    };
+  } | null;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -27,12 +53,16 @@ function asString(value: unknown): string | null {
   return typeof value === 'string' && value.length > 0 ? value : null;
 }
 
+const GITHUB_USER = 'Hazuru00';
+const REVALIDATE_SECONDS = 60 * 60 * 24;
+const RECENT_REPO_LIMIT = 6;
+
 /** Combina el perfil con las estrellas sumadas de los repos. */
 export function toGitHubStats(profile: unknown, repos: unknown): GitHubStats {
   const repoList: unknown[] = Array.isArray(repos) ? repos : [];
 
   if (!isRecord(profile) || typeof profile.public_repos !== 'number') {
-    return { publicRepos: 0, totalStars: 0, followers: 0, contributions: 0 };
+    return { publicRepos: 0, totalStars: 0, followers: 0, contributions: 0, pullRequests: 0 };
   }
 
   let totalStars = 0;
@@ -44,60 +74,61 @@ export function toGitHubStats(profile: unknown, repos: unknown): GitHubStats {
     publicRepos: profile.public_repos,
     totalStars,
     followers: typeof profile.followers === 'number' ? profile.followers : 0,
-    contributions: 0, // Se llena después con datos reales de eventos
+    contributions: 0, // Se llena con datos reales de GraphQL
+    pullRequests: 0,  // Se llena con datos reales de GraphQL
   };
 }
 
-/** Intenta contar eventos reales (PushEvent + PullRequest merged) desde el endpoint público. */
-async function fetchContributionsFromEvents(): Promise<number> {
-  try {
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/events/public`, {
-      headers: { 'User-Agent': 'HazuDev-Portfolio', Accept: 'application/vnd.github+json' },
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (!res.ok) return -1;
-    const events = (await res.json()) as Array<{
-      type: string;
-      payload: { pull_request?: { action: string } };
-    }>;
-    let count = 0;
-    for (const ev of events) {
-      if (ev.type === 'PushEvent') count += 1;
-      else if (ev.type === 'PullRequestEvent') {
-        if (ev.payload && 'pull_request' in ev.payload && ev.payload.pull_request?.action === 'merged') count += 1;
-      }
+/** Obtiene la fecha del último push real por repo desde los eventos públicos.
+ * Los eventos traen el nombre con owner ("HazuDev/repo"), los repos sin él. */
+function getLastPushByRepo(
+  events: Array<{ type: string; created_at: string; repo?: { name?: string } }>,
+): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const ev of events) {
+    if (ev.type !== 'PushEvent' || !ev.repo?.name) continue;
+    const fullName = ev.repo.name;
+    const shortName = fullName.includes('/') ? fullName.slice(fullName.indexOf('/') + 1) : fullName;
+    const existing = map.get(shortName);
+    if (!existing || ev.created_at > existing) {
+      map.set(shortName, ev.created_at);
     }
-    return count >= 0 ? count : -1;
-  } catch {
-    return -1;
   }
+  return map;
 }
 
-/** Repos no fork, recientes, limitados. */
-export function toRecentRepos(repos: unknown, limit: number): RepoInfo[] {
+/** Repos no fork, ordenados por último push real (más reciente primero), limitados. */
+export function toRecentRepos(
+  repos: unknown,
+  lastPushByRepo: Map<string, string> = new Map(),
+  limit: number = RECENT_REPO_LIMIT,
+): RepoInfo[] {
   if (!Array.isArray(repos)) return [];
+
+  const pushDate = (name: string, updatedAt: string): string =>
+    lastPushByRepo.get(name) ?? updatedAt;
 
   return repos
     .filter((r: unknown) => isRecord(r) && !r.fork && typeof r.name === 'string' && r.name.length > 0)
-    .sort((a: Record<string, unknown>, b: Record<string, unknown>) => {
-      const aDate = new Date(String(a.updated_at ?? '')).getTime();
-      const bDate = new Date(String(b.updated_at ?? '')).getTime();
-      return bDate - aDate;
+    .sort((a, b) => {
+      const aDate = pushDate(String(a.name ?? ''), String(a.updated_at ?? ''));
+      const bDate = pushDate(String(b.name ?? ''), String(b.updated_at ?? ''));
+      return new Date(bDate).getTime() - new Date(aDate).getTime();
     })
     .slice(0, limit)
-    .map((r: Record<string, unknown>) => ({
-      name: String(r.name),
-      description: asString(r.description),
-      htmlUrl: asString(r.html_url) ?? '',
-      language: asString(r.language),
-      stars: Number(r.stargazers_count) || 0,
-      updatedAt: asString(r.updated_at) ?? '',
-    }));
+    .map((r: Record<string, unknown>) => {
+      const name = String(r.name);
+      return {
+        name,
+        description: asString(r.description),
+        htmlUrl: asString(r.html_url) ?? '',
+        language: asString(r.language),
+        stars: Number(r.stargazers_count) || 0,
+        updatedAt: asString(r.updated_at) ?? '',
+        lastPush: lastPushByRepo.get(name),
+      };
+    });
 }
-
-const GITHUB_USER = 'Hazuru00';
-const REVALIDATE_SECONDS = 60 * 60 * 24;
-const RECENT_REPO_LIMIT = 6;
 
 async function githubFetch(url: string): Promise<Response | null> {
   try {
@@ -111,30 +142,107 @@ async function githubFetch(url: string): Promise<Response | null> {
   }
 }
 
+/** Consulta GraphQL autenticada; devuelve null si no hay token o falla. */
+async function fetchGitHubGraphQL(query: string): Promise<GraphQLContributionsResponse | null> {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return null;
+
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `bearer ${token}`,
+        'Content-Type': 'application/json',
+        'User-Agent': 'HazuDev-Portfolio',
+      },
+      body: JSON.stringify({ query }),
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as GraphQLContributionsResponse & { errors?: unknown[] };
+    if (json.errors || !json.user) return null;
+    return json;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchContributions(): Promise<{
+  commits: number;
+  prs: number;
+  calendar: ContributionCalendar | null;
+}> {
+  const year = new Date().getFullYear();
+  const data = await fetchGitHubGraphQL(`
+    query {
+      user(login: "${GITHUB_USER}") {
+        contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${year}-12-31T23:59:59Z") {
+          totalCommitContributions
+          totalPullRequestContributions
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays { date contributionCount color }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const cc = data?.user?.contributionsCollection;
+  if (!cc) return { commits: 0, prs: 0, calendar: null };
+
+  return {
+    commits: cc.totalCommitContributions ?? 0,
+    prs: cc.totalPullRequestContributions ?? 0,
+    calendar: cc.contributionCalendar ?? null,
+  };
+}
+
+async function fetchEventsForRepoOrdering(): Promise<Map<string, string>> {
+  const res = await githubFetch(`https://api.github.com/users/${GITHUB_USER}/events/public`);
+  if (!res) return new Map();
+  try {
+    const events = (await res.json()) as Array<{
+      type: string;
+      created_at: string;
+      repo?: { name?: string };
+    }>;
+    return getLastPushByRepo(events);
+  } catch {
+    return new Map();
+  }
+}
+
 export async function fetchGitHubData(): Promise<GitHubData> {
-  const [profileRes, reposRes, eventsRes] = await Promise.all([
+  const empty: GitHubData = { stats: null, repos: [], calendar: null };
+  const [profileRes, reposRes, contributions, eventsMap] = await Promise.all([
     githubFetch(`https://api.github.com/users/${GITHUB_USER}`),
     githubFetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`),
-    fetchContributionsFromEvents(),
+    fetchContributions(),
+    fetchEventsForRepoOrdering(),
   ]);
 
-  if (!profileRes || !reposRes) return { stats: null, repos: [] };
+  if (!profileRes || !reposRes) return empty;
 
   try {
     const profile = await profileRes.json();
     const repos = await reposRes.json();
-
     const baseStats = toGitHubStats(profile, repos);
-    let contributions = baseStats.contributions;
-    if (eventsRes >= 0) {
-      contributions = eventsRes;
-    }
 
     return {
-      stats: { publicRepos: baseStats.publicRepos, totalStars: baseStats.totalStars, followers: baseStats.followers, contributions },
-      repos: toRecentRepos(repos, RECENT_REPO_LIMIT),
+      stats: {
+        publicRepos: baseStats.publicRepos,
+        totalStars: baseStats.totalStars,
+        followers: baseStats.followers,
+        contributions: contributions.commits,
+        pullRequests: contributions.prs,
+      },
+      repos: toRecentRepos(repos, eventsMap, RECENT_REPO_LIMIT),
+      calendar: contributions.calendar,
     };
   } catch {
-    return { stats: null, repos: [] };
+    return empty;
   }
 }
