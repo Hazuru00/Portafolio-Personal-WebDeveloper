@@ -29,7 +29,7 @@
         "title": "Pentest Lab",
         "description": "Laboratorio de prácticas de ciberseguridad con agentes de IA, sandboxing con Docker y orquestación con FastAPI.",
         "technicalDescription": "Python, FastAPI, Docker, CrewAI",
-        "image": "/portfolio-1-desing.PNG",
+        "image": "",
         "tags": ["Python", "FastAPI", "Docker", "Ciberseguridad", "IA"],
         "repoUrl": "https://github.com/Hazuru00/pentest_lab"
     },

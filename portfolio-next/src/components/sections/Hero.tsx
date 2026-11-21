@@ -2,7 +2,9 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { ArrowRight, Mail } from 'lucide-react';
 
 const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -92,6 +94,29 @@ const Hero = () => {
           <p className="text-sm md:text-base text-violet-300 mt-3 font-medium">
             Técnico en Telemática
           </p>
+        </motion.div>
+
+        {/* CTAs principales */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+        >
+          <Link
+            href="#projects"
+            className="inline-flex items-center gap-2 bg-violet-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg shadow-violet-800/30 transition-all duration-300 hover:bg-violet-500 hover:scale-105"
+          >
+            Ver Proyectos
+            <ArrowRight size={18} />
+          </Link>
+          <Link
+            href="#contact"
+            className="inline-flex items-center gap-2 border border-violet-500/50 text-violet-300 font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-violet-500/10 hover:border-violet-400"
+          >
+            Contáctame
+            <Mail size={18} />
+          </Link>
         </motion.div>
 
         {/* Scroll Down Indicator */}

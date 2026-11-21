@@ -14,6 +14,7 @@ const personJsonLd = {
   "@type": "Person",
   name: "HazuDev",
   jobTitle: "Desarrollador Fullstack Semi Senior",
+  totalExperience: "5 años",
   url: "https://hazuru.vercel.app",
   image: "https://avatars.githubusercontent.com/u/92418515?v=4",
   sameAs: [

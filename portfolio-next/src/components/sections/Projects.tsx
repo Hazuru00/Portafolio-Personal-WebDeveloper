@@ -8,7 +8,8 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 interface Project {
   title: string;
   description: string;
-  image: string;
+  technicalDescription?: string;
+  image?: string;
   tags: string[];
   liveUrl?: string;
   repoUrl?: string;
@@ -46,22 +47,39 @@ const ProjectCard = ({ project }: { project: Project }) => {
       whileHover={reduceMotion ? undefined : { y: -8 }}
       className="group relative bg-zinc-900/60 border border-zinc-800 rounded-2xl overflow-hidden shadow-lg transition-[border-color,box-shadow] duration-300 hover:border-violet-700/80 hover:shadow-violet-900/30 hover:shadow-2xl flex-shrink-0 w-11/12 sm:w-5/6 md:w-[45vw] lg:w-[30vw]"
     >
-      <div className="relative h-60 w-full overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
-          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-      </div>
+      {project.image ? (
+        <div className="relative h-60 w-full overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
+            className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        </div>
+      ) : (
+        // Placeholder para proyectos sin captura disponible:
+        // iniciales del título sobre el fondo de rejilla característico
+        <div className="relative h-60 w-full overflow-hidden bg-zinc-900/60 flex flex-col items-center justify-center gap-3 border-b border-zinc-800">
+          <div className="absolute inset-0 bg-grid-zinc-800/30 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
+          <span className="relative text-5xl font-bold tracking-tighter text-violet-400">
+            {project.title.split(/\s+/).map((w) => w[0]).join('').slice(0, 3).toUpperCase()}
+          </span>
+          <span className="relative text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+            Sin captura disponible
+          </span>
+        </div>
+      )}
 
       <div className="p-6 relative z-10">
         <h3 className="text-2xl font-bold text-zinc-100 mb-3">{project.title}</h3>
         <p className="text-zinc-400 mb-5 text-base leading-relaxed h-24 overflow-hidden [mask-image:linear-gradient(to_bottom,white_60%,transparent)]">
           {project.description}
         </p>
+        {project.technicalDescription && (
+          <p className="text-xs text-zinc-500 mb-4">{project.technicalDescription}</p>
+        )}
         <div className="flex flex-wrap gap-2 mb-6">
           {project.tags.map(tag => (
             <span key={tag} className="text-xs font-semibold px-3 py-1 bg-violet-500/10 border border-violet-900/50 text-violet-300 rounded-full">

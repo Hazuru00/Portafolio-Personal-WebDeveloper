@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { FaGithub, FaStar, FaUsers } from 'react-icons/fa';
+import type { GitHubStats } from '@/lib/github';
 import { techItems } from '@/data/tech';
 import projectsData from '../../../public/projects.json';
 
@@ -49,7 +51,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   );
 };
 
-const Stats = () => {
+const Stats = ({ github }: { github: GitHubStats | null }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 });
 
@@ -73,6 +75,30 @@ const Stats = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* Datos en vivo desde el perfil público de GitHub */}
+      {github && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-zinc-400"
+        >
+          <span className="inline-flex items-center gap-2">
+            <FaGithub className="text-violet-400" />
+            {github.publicRepos} repos públicos
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <FaStar className="text-violet-400" />
+            {github.totalStars} estrellas
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <FaUsers className="text-violet-400" />
+            {github.followers} seguidores
+          </span>
+          <span className="text-xs text-zinc-600">· sincronizado desde GitHub</span>
+        </motion.div>
+      )}
     </section>
   );
 };
