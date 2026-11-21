@@ -18,21 +18,32 @@ const repo = (over: Record<string, unknown> = {}) => ({
 });
 
 describe('toGitHubStats', () => {
-  it('combina el perfil con las estrellas sumadas de los repos', () => {
-    const profile = { login: 'Hazuru00', public_repos: 12, followers: 7 };
+  it('devuelve stats básicos cuando el perfil es válido', () => {
+    const profile = { login: 'Hazuru00', public_repos: 12, followers: 7, repos_url: '' };
     const repos = [{ stargazers_count: 3 }, { stargazers_count: 5 }, {}];
 
-    expect(toGitHubStats(profile, repos)).toEqual({
+    const result = toGitHubStats(profile, repos);
+    expect(result).toEqual({
       publicRepos: 12,
       totalStars: 8,
       followers: 7,
+      contributions: 2, // 2 repos con stargazers_count > 0
     });
   });
 
-  it('devuelve null si el perfil no tiene el formato esperado', () => {
-    expect(toGitHubStats(null, [])).toBeNull();
-    expect(toGitHubStats({}, [])).toBeNull();
-    expect(toGitHubStats({ public_repos: 'muchos' }, [])).toBeNull();
+  it('devuelve ceros si el perfil no tiene el formato esperado', () => {
+    expect(toGitHubStats(null, [])).toEqual({ publicRepos: 0, totalStars: 0, followers: 0, contributions: 0 });
+    expect(toGitHubStats({}, [])).toEqual({ publicRepos: 0, totalStars: 0, followers: 0, contributions: 0 });
+    expect(toGitHubStats({ public_repos: 'muchos' }, [])).toEqual({ publicRepos: 0, totalStars: 0, followers: 0, contributions: 0 });
+  });
+
+  it('contribuciones = 0 cuando no hay repos con estrellas', () => {
+    const profile = { public_repos: 5, followers: 1 };
+    const repos = [{ name: 'empty-repo' }, { name: 'other' }]; // sin stargazers_count
+
+    const result = toGitHubStats(profile, repos);
+    expect(result.contributions).toBe(0);
+    expect(result.totalStars).toBe(0);
   });
 });
 
@@ -88,15 +99,15 @@ describe('fetchGitHubData', () => {
     vi.stubGlobal(
       'fetch',
       vi.fn()
-        .mockResolvedValueOnce(json({ login: 'Hazuru00', public_repos: 3, followers: 4 }))
+        .mockResolvedValueOnce(json({ login: 'Hazuru00', public_repos: 3, followers: 4, repos_url: '' }))
         .mockResolvedValueOnce(
-          json([repo({ name: 'uno', stargazers_count: 9 }), repo({ name: 'dos' })]),
+          json([repo({ name: 'uno', stargazers_count: 9 }), repo({ name: 'dos', stargazers_count: 0 })]),
         ),
     );
 
     const data = await fetchGitHubData();
 
-    expect(data.stats).toEqual({ publicRepos: 3, totalStars: 11, followers: 4 });
+    expect(data.stats).toEqual({ publicRepos: 3, totalStars: 9, followers: 4, contributions: 1 });
     expect(data.repos.map((r) => r.name)).toEqual(['uno', 'dos']);
   });
 });
