@@ -27,7 +27,7 @@ describe('toGitHubStats', () => {
       publicRepos: 12,
       totalStars: 8,
       followers: 7,
-      contributions: 2, // 2 repos con stargazers_count > 0
+      contributions: 0, // Se llena después con datos reales de eventos
     });
   });
 
@@ -107,7 +107,7 @@ describe('fetchGitHubData', () => {
 
     const data = await fetchGitHubData();
 
-    expect(data.stats).toEqual({ publicRepos: 3, totalStars: 9, followers: 4, contributions: 1 });
+    expect(data.stats).toEqual({ publicRepos: 3, totalStars: 9, followers: 4, contributions: 0 });
     expect(data.repos.map((r) => r.name)).toEqual(['uno', 'dos']);
   });
 });

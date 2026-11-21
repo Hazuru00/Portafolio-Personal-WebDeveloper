@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
-import { FaGithub, FaStar, FaUsers } from 'react-icons/fa';
+import { FaGithub, FaStar, FaUsers, FaCode } from 'react-icons/fa';
 import type { GitHubStats } from '@/lib/github';
 import { techItems } from '@/data/tech';
 import projectsData from '../../../public/projects.json';
@@ -16,7 +16,7 @@ interface Stat {
 const stats: Stat[] = [
   { value: projectsData.length, suffix: '+', label: 'Proyectos destacados' },
   { value: techItems.length, suffix: '', label: 'Tecnologías en el stack' },
-  { value: 6, suffix: '', label: 'Años de trayectoria' },
+  { value: 5, suffix: '', label: 'Años de trayectoria' },
 ];
 
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
@@ -95,6 +95,10 @@ const Stats = ({ github }: { github: GitHubStats | null }) => {
           <span className="inline-flex items-center gap-2">
             <FaUsers className="text-violet-400" />
             {github.followers} seguidores
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <FaCode className="text-violet-400" />
+            {github.contributions} contribuciones este año
           </span>
           <span className="text-xs text-zinc-600">· sincronizado desde GitHub</span>
         </motion.div>

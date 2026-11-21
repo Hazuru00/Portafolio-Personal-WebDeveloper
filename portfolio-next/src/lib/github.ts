@@ -40,17 +40,11 @@ export function toGitHubStats(profile: unknown, repos: unknown): GitHubStats {
     totalStars += Number((r as Record<string, unknown>).stargazers_count) || 0;
   }
 
-  let contributions = 0;
-  for (const r of repoList) {
-    const sx = Number((r as Record<string, unknown>).stargazers_count);
-    if (sx > 0) contributions += 1;
-  }
-
   return {
     publicRepos: profile.public_repos,
     totalStars,
     followers: typeof profile.followers === 'number' ? profile.followers : 0,
-    contributions,
+    contributions: 0, // Se llena después con datos reales de eventos
   };
 }
 
@@ -85,9 +79,11 @@ export function toRecentRepos(repos: unknown, limit: number): RepoInfo[] {
 
   return repos
     .filter((r: unknown) => isRecord(r) && !r.fork && typeof r.name === 'string' && r.name.length > 0)
-    .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
-      String(b.updated_at ?? '').localeCompare(String(a.updated_at ?? '')),
-    )
+    .sort((a: Record<string, unknown>, b: Record<string, unknown>) => {
+      const aDate = new Date(String(a.updated_at ?? '')).getTime();
+      const bDate = new Date(String(b.updated_at ?? '')).getTime();
+      return bDate - aDate;
+    })
     .slice(0, limit)
     .map((r: Record<string, unknown>) => ({
       name: String(r.name),
@@ -101,7 +97,7 @@ export function toRecentRepos(repos: unknown, limit: number): RepoInfo[] {
 
 const GITHUB_USER = 'Hazuru00';
 const REVALIDATE_SECONDS = 60 * 60 * 24;
-const RECENT_REPO_LIMIT = 3;
+const RECENT_REPO_LIMIT = 6;
 
 async function githubFetch(url: string): Promise<Response | null> {
   try {
@@ -130,7 +126,9 @@ export async function fetchGitHubData(): Promise<GitHubData> {
 
     const baseStats = toGitHubStats(profile, repos);
     let contributions = baseStats.contributions;
-    if (eventsRes >= 0) contributions = eventsRes;
+    if (eventsRes >= 0) {
+      contributions = eventsRes;
+    }
 
     return {
       stats: { publicRepos: baseStats.publicRepos, totalStars: baseStats.totalStars, followers: baseStats.followers, contributions },
