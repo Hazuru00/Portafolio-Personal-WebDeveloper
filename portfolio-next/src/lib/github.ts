@@ -62,12 +62,15 @@ async function fetchContributionsFromEvents(): Promise<number> {
       next: { revalidate: REVALIDATE_SECONDS },
     });
     if (!res.ok) return -1;
-    const events = (await res.json()) as any;
+    const events = (await res.json()) as Array<{
+      type: string;
+      payload: { pull_request?: { action: string } };
+    }>;
     let count = 0;
     for (const ev of events) {
       if (ev.type === 'PushEvent') count += 1;
       else if (ev.type === 'PullRequestEvent') {
-        if (ev.payload && 'pull_request' in ev.payload && ev.payload.pull_request.action === 'merged') count += 1;
+        if (ev.payload && 'pull_request' in ev.payload && ev.payload.pull_request?.action === 'merged') count += 1;
       }
     }
     return count >= 0 ? count : -1;
