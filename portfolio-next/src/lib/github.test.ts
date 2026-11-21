@@ -118,11 +118,13 @@ describe('fetchGitHubData', () => {
         ]))
         // GraphQL (contribuciones) — se llama antes que eventos en el Promise.all
         .mockResolvedValueOnce(jsonResponse({
-          user: {
-            contributionsCollection: {
-              totalCommitContributions: 549,
-              totalPullRequestContributions: 7,
-              contributionCalendar: calendar,
+          data: {
+            user: {
+              contributionsCollection: {
+                totalCommitContributions: 549,
+                totalPullRequestContributions: 7,
+                contributionCalendar: calendar,
+              },
             },
           },
         }))
@@ -153,11 +155,13 @@ describe('fetchGitHubData', () => {
           repo({ name: 'Portafolio-Personal-WebDeveloper', updated_at: '2026-08-27T03:52:25Z' }),
         ]))
         .mockResolvedValueOnce(jsonResponse({
-          user: {
-            contributionsCollection: {
-              totalCommitContributions: 10,
-              totalPullRequestContributions: 1,
-              contributionCalendar: { totalContributions: 11, weeks: [] },
+          data: {
+            user: {
+              contributionsCollection: {
+                totalCommitContributions: 10,
+                totalPullRequestContributions: 1,
+                contributionCalendar: { totalContributions: 11, weeks: [] },
+              },
             },
           },
         }))

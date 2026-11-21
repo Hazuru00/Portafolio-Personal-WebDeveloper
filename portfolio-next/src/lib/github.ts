@@ -36,12 +36,14 @@ export interface GitHubData {
 }
 
 interface GraphQLContributionsResponse {
-  user: {
-    contributionsCollection: {
-      totalCommitContributions: number;
-      totalPullRequestContributions: number;
-      contributionCalendar: ContributionCalendar;
-    };
+  data: {
+    user: {
+      contributionsCollection: {
+        totalCommitContributions: number;
+        totalPullRequestContributions: number;
+        contributionCalendar: ContributionCalendar;
+      };
+    } | null;
   } | null;
 }
 
@@ -143,7 +145,7 @@ async function githubFetch(url: string): Promise<Response | null> {
 }
 
 /** Consulta GraphQL autenticada; devuelve null si no hay token o falla. */
-async function fetchGitHubGraphQL(query: string): Promise<GraphQLContributionsResponse | null> {
+async function fetchGitHubGraphQL(query: string): Promise<GraphQLContributionsResponse['data']> {
   const token = process.env.GITHUB_TOKEN;
   if (!token) return null;
 
@@ -160,8 +162,8 @@ async function fetchGitHubGraphQL(query: string): Promise<GraphQLContributionsRe
     });
     if (!res.ok) return null;
     const json = (await res.json()) as GraphQLContributionsResponse & { errors?: unknown[] };
-    if (json.errors || !json.user) return null;
-    return json;
+    if (json.errors || !json.data?.user) return null;
+    return json.data;
   } catch {
     return null;
   }
