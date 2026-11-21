@@ -19,7 +19,6 @@ export interface GitHubData {
   repos: RepoInfo[];
 }
 
-// Constantes de configuración
 const GITHUB_USER = 'Hazuru00';
 const REVALIDATE_SECONDS = 60 * 60 * 24; // 24 h
 const RECENT_REPO_LIMIT = 3;
@@ -56,7 +55,7 @@ export function toGitHubStats(profile: unknown, repos: unknown): GitHubStats {
   // Usa filter sobre el array y luego filter isRecord para seguridad; count después.
   const repoRecords: Record<string, unknown>[] = [];
   for (const r of repoList) {
-    if (isRecord(r) && typeof r.stargazers_count === 'number' && r.stargazers_count > 0) {
+    if (isRecord(r) && typeof (r as Record<string, unknown>).stargazers_count === 'number' && (r as Record<string, unknown>).stargazers_count > 0) {
       repoRecords.push(r);
     }
   }
@@ -96,19 +95,13 @@ async function fetchContributionsFromEvents(): Promise<number> {
         count += 1; // cada PushEvent cuenta como un lote de commits; lo contamos como 1 evento
       } else if (type === 'PullRequestEvent') {
         const payload = event.payload;
-        if (
-          typeof payload === 'object' &&
-          payload !== null &&
-          'pull_request' in payload
-        ) {
+        if (typeof payload === 'object' && payload !== null) {
           const pr = payload.pull_request;
-          if (
-            typeof pr === 'object' &&
-            pr !== null &&
-            typeof (pr as Record<string, unknown>).action === 'string' &&
-            (pr as Record<string, unknown>).action === 'merged'
-          ) {
-            count += 1;
+          if (typeof pr === 'object' && pr !== null) {
+            const action = pr.action as string | undefined;
+            if (action === 'merged') {
+              count += 1;
+            }
           }
         }
       }
@@ -180,7 +173,7 @@ export async function fetchGitHubData(): Promise<GitHubData> {
     let contributions = baseStats.contributions;
 
     // Si el fetch de events fue exitoso (>= 0), preferimos ese número real.
-    // -1 significa error → usamos el fallback de estrellas.
+    // -1 significa error -> usamos el fallback de estrellas.
     if (eventsRes >= 0) {
       contributions = eventsRes;
     }
